@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "obs-scenarios-simulations"
+version = "0.0.0"
+description = "LIGO/Virgo/KAGRA observing scenarios simulations"
+authors = ["Leo Singer <leo.singer@ligo.org>"]
+
+[tool.poetry.dependencies]
+astropy = "^3.2"
+python = "^3.6"
+scipy = "*"
+"ligo.skymap" = "^0.3.1"
+"scikits.bootstrap" = "*"
+gwpy = "*"
+ipykernel = "*"
+ipython = "*"
+ipywidgets = "*"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
