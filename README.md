@@ -6,31 +6,63 @@ Paper.
 
 ## Setting up your environment
 
-I use [Poetry](https://python-poetry.org) to manage the installation of the
-dependencies for this analysis on the cluster.
+I use [Poetry] to manage the installation of the dependencies for this analysis
+on the cluster. First, install Poetry by following the
+[official Poetry installation instructions].
 
-First, make sure that the following line is in your shell login script (`.bash_profile`, `.profile`, or equivalent):
+Next, clone this repository:
 
-    export PATH=$HOME/.local/bin:$PATH
-
-Log out and log back in if necessary. Clone this repository:
-
-    git clone https://github.com/lpsinger/observing-scenarios-simulations
-    cd observing-scenarios-simulations
+    $ git clone https://github.com/lpsinger/observing-scenarios-simulations
+    $ cd observing-scenarios-simulations
 
 Next, make sure that pip is up to date, and install poetry:
 
-    pip3 install --upgrade --user pip
-    pip install --user poetry
+    $ pip3 install --upgrade --user pip
+    $ pip install --user poetry
 
-Note, due to https://github.com/python-poetry/poetry/issues/1651, you need to also make sure that pip is up to date _inside_ the poetry environment:
+Note, due to [Poetry issue #1651], you need to also make sure that pip is up to
+date _inside_ the poetry environment:
 
-    poetry run pip install --upgrade pip
+    $ poetry run pip install --upgrade pip
 
 Finally, install the dependencies and launch a shell inside the poetry env:
 
-    poetry install
-    poetry shell
+    $ poetry install
+    $ poetry shell
+
+### Cluster-specific environment instructions
+
+#### [NASA Pleiades]
+
+1.  Login to a Pleiades front end node. Add the following to your `~/.profile`
+    script:
+
+        module use -a /nasa/modulefiles/testing
+        module load python3-intel/2020.0.014
+
+    Log out, and log back in.
+
+2.  Install Poetry following the
+    [official Poetry installation instructions for Linux]:
+
+        $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+
+    Log out, and log back in again.
+
+3.  Clone this repository in your scratch directrory:
+
+        $ cd /nobackup/$USER
+        $ git clone https://github.com/lpsinger/observing-scenarios-simulations
+        $ cd observing-scenarios-simulations
+
+4.  Update Pip within the Poetry environment:
+
+        $ poetry run pip install --upgrade pip
+
+5.  Finally, install the dependencies and launch a shell inside the poetry env:
+
+        $ poetry install
+        $ poetry shell
 
 ## To generate source populations
 
@@ -69,3 +101,10 @@ git diffs, run this command to sort the rows in the data files:
 ## To update human-readable figures and tables
 
 Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
+
+
+[Poetry]: https://python-poetry.org
+[Poetry issue #1651]: https://github.com/python-poetry/poetry/issues/1651
+[official Poetry installation instructions]: https://python-poetry.org/docs/#installation
+[official Poetry installation instructions for Linux]: https://python-poetry.org/docs/#osx-linux-bashonwindows-install-instructions
+[NASA Pleiades]: https://www.nas.nasa.gov/hecc/
