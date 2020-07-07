@@ -6,60 +6,54 @@ Paper.
 
 ## Setting up your environment
 
-I use [Poetry] to manage the installation of the dependencies for this analysis
-on the cluster. First, install Poetry by following the
-[official Poetry installation instructions].
+1.  Set up your cluster environment.
 
-Next, clone this repository:
+    **[IGWN Grid]**: No special configuration necessary.
 
-    $ git clone https://github.com/lpsinger/observing-scenarios-simulations
-    $ cd observing-scenarios-simulations
+    **[NASA Pleiades]**:
 
-Next, make sure that pip is up to date, and install poetry:
+    *   Login to a Pleiades front end node.
 
-    $ pip3 install --upgrade --user pip
-    $ pip install --user poetry
+    *   Install lalsuite-extra by running these commands:
 
-Note, due to [Poetry issue #1651], you need to also make sure that pip is up to
-date _inside_ the poetry environment:
+            $ cd /nobackup/$USER
+            $ curl -O https://software.igwn.org/lscsoft/source/lalsuite-extra-1.3.0.tar.gz
+            $ tar xf lalsuite-extra-1.3.0.tar.gz
+            $ cd lalsuite-extra-1.3.0
+            $ ./configure --prefix=$HOME/.local
+            $ make install
 
-    $ poetry run pip install --upgrade pip
+    *   Add the following to your `~/.profile` script:
 
-Finally, install the dependencies and launch a shell inside the poetry env:
+            export LAL_DATA_PATH=$HOME/.local/share/lalsimulation
+            module use -a /nasa/modulefiles/testing
+            module load python3-intel/2020.0.014
 
-    $ poetry install
-    $ poetry shell
+    *   Log out, and log back in.
 
-### Cluster-specific environment instructions
+2.  Install Poetry.
 
-#### [NASA Pleiades]
-
-1.  Login to a Pleiades front end node. Add the following to your `~/.profile`
-    script:
-
-        module use -a /nasa/modulefiles/testing
-        module load python3-intel/2020.0.014
-
-    Log out, and log back in.
-
-2.  Install Poetry following the
-    [official Poetry installation instructions for Linux]:
+    I use [Poetry] to manage the installation of the dependencies for this analysis on the cluster. Install Poetry by running the command in the
+    [official Poetry installation instructions]:
 
         $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 
-    Log out, and log back in again.
+    Then log out, and log back in.
 
-3.  Clone this repository in your scratch directrory:
+3.  Clone this repository (note, on [NASA Pleiades], clone this in your
+    `/nobackup/$USER` directory):
 
-        $ cd /nobackup/$USER
         $ git clone https://github.com/lpsinger/observing-scenarios-simulations
         $ cd observing-scenarios-simulations
 
-4.  Update Pip within the Poetry environment:
+4.  Install dependencies with Poetry.
+
+    Note, due to [Poetry issue #1651], you need to also make sure that pip is
+    up to date _inside_ the poetry environment:
 
         $ poetry run pip install --upgrade pip
 
-5.  Finally, install the dependencies and launch a shell inside the poetry env:
+    Finally, install the dependencies and launch a shell inside the poetry env:
 
         $ poetry install
         $ poetry shell
@@ -103,8 +97,8 @@ git diffs, run this command to sort the rows in the data files:
 Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
 
 
+[IGWN Grid]: https://computing.docs.ligo.org/guide/grid/
+[NASA Pleiades]: https://www.nas.nasa.gov/hecc/
 [Poetry]: https://python-poetry.org
 [Poetry issue #1651]: https://github.com/python-poetry/poetry/issues/1651
 [official Poetry installation instructions]: https://python-poetry.org/docs/#installation
-[official Poetry installation instructions for Linux]: https://python-poetry.org/docs/#osx-linux-bashonwindows-install-instructions
-[NASA Pleiades]: https://www.nas.nasa.gov/hecc/
