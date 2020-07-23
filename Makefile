@@ -68,7 +68,7 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 #
 
 runs/%/events.sqlite: runs/%/events.xml.gz
-	ligolw_sqlite --ilwdchar-compat -p -r -d $@ $<
+	ligolw_sqlite -p -r -d $@ $<
 
 
 #
@@ -82,8 +82,8 @@ coincs_dat_columns := coinc_event_id ifos snr
 
 %/injections.dat: %/events.xml.gz
 	echo "$(subst $(space),$(tab),$(injections_dat_columns))" > $@ && \
-	ligolw_print --ilwdchar-compat -t sim_inspiral $(injections_dat_columns:%=-c %) -d "$(tab)" $< >> $@
+	ligolw_print -t sim_inspiral $(injections_dat_columns:%=-c %) -d "$(tab)" $< >> $@
 
 %/coincs.dat: %/events.xml.gz
 	echo "$(subst $(space),$(tab),$(coincs_dat_columns))" > $@ && \
-	ligolw_print --ilwdchar-compat -t coinc_inspiral $(coincs_dat_columns:%=-c %) -d "$(tab)" $< >> $@
+	ligolw_print -t coinc_inspiral $(coincs_dat_columns:%=-c %) -d "$(tab)" $< >> $@
