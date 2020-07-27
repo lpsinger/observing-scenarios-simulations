@@ -1,3 +1,11 @@
+# Python runtime
 __pycache__
+
+# PyCharm project files
+.idea
+
+# JupyterLab
 .ipynb_checkpoints
+
+# Generated data
 runs
