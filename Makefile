@@ -1,7 +1,14 @@
 RUNS = O3 O4 O5
 POPS = bns_astro nsbh_astro bbh_astro
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
-all: $(foreach run,$(RUNS),runs/$(run)/psds.xml) $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FILENAMES),runs/$(run)/$(pop)/$(filename))))
+
+all: psds injections
+
+psds: $(foreach run,$(RUNS),runs/$(run)/psds.xml)
+
+injections: $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FILENAMES),runs/$(run)/$(pop)/$(filename))))
+
+.PHONY: all psds injections
 
 
 #
