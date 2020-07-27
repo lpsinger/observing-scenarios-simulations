@@ -37,7 +37,7 @@ O5-psds = \
 #
 
 .SECONDEXPANSION:
-psd_files = $(filter-out --%,$(value $(1)-psds))
+psd_files = $(sort $(filter-out --%,$(value $(1)-psds)))
 runs/%/psds.xml: $$(call psd_files,%)
 	mkdir -p $(@D) && ./pack-psds.py -o $@ $(value $*-psds)
 
