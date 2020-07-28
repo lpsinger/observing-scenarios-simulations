@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "obs-scenarios-simulations"
+name = "observing-scenarios-simulations"
 version = "0.0.0"
 description = "LIGO/Virgo/KAGRA observing scenarios simulations"
 authors = ["Leo Singer <leo.singer@ligo.org>"]
