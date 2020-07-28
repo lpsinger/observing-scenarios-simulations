@@ -23,7 +23,7 @@ O4-psds = \
 	--H1 aligo_O4high.txt \
 	--L1 aligo_O4high.txt \
 	--V1 avirgo_O4high_NEW.txt \
-	--K1 kagra_25Mpc.txt
+	--K1 kagra_80Mpc.txt
 O5-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
