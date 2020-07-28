@@ -4,7 +4,5 @@ import sys
 
 _, filename = sys.argv
 table = Table.read(filename, format='ascii')
-table['sortindex'] = [int(_.split(':')[-1]) for _ in table['coinc_event_id']]
-table.sort('sortindex')
-del table['sortindex']
+table.sort('coinc_event_id')
 table.write(filename, format='ascii.tab', overwrite=True)
