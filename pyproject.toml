@@ -8,6 +8,7 @@ authors = ["Leo Singer <leo.singer@ligo.org>"]
 astropy = "^3.2"
 python = "^3.6"
 scipy = "*"
+seaborn = "*"
 "ligo.skymap" = "^0.4.0"
 "scikits.bootstrap" = "*"
 gwpy = "*"

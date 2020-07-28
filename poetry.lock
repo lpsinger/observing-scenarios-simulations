@@ -197,7 +197,7 @@ description = "A python interface to the GW Open Science data archive"
 name = "gwosc"
 optional = false
 python-versions = ">=3.5"
-version = "0.5.3"
+version = "0.5.5"
 
 [package.extras]
 docs = ["sphinx", "sphinx-rtd-theme", "sphinx-automodapi"]
@@ -707,6 +707,22 @@ six = "*"
 
 [[package]]
 category = "main"
+description = "Powerful data structures for data analysis, time series, and statistics"
+name = "pandas"
+optional = false
+python-versions = ">=3.5.3"
+version = "0.25.3"
+
+[package.dependencies]
+numpy = ">=1.13.3"
+python-dateutil = ">=2.6.1"
+pytz = ">=2017.2"
+
+[package.extras]
+test = ["pytest (>=4.0.2)", "pytest-xdist", "hypothesis (>=3.58)"]
+
+[[package]]
+category = "main"
 description = "Utilities for writing pandoc filters in python"
 name = "pandocfilters"
 optional = false
@@ -966,6 +982,20 @@ numpy = ">=1.14.5"
 
 [[package]]
 category = "main"
+description = "seaborn: statistical data visualization"
+name = "seaborn"
+optional = false
+python-versions = ">=3.6"
+version = "0.10.1"
+
+[package.dependencies]
+matplotlib = ">=2.1.2"
+numpy = ">=1.13.3"
+pandas = ">=0.22.0"
+scipy = ">=1.0.1"
+
+[[package]]
+category = "main"
 description = "Send file to trash natively under Mac OS X, Windows and Linux."
 name = "send2trash"
 optional = false
@@ -1080,7 +1110,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "88f87b17a58a2e76d3ef401bc83a15c251dbb16a3adf2fec601b9bc59e38b427"
+content-hash = "1af85b28b5ea09690fd97dbf3aa1d6f14d077e2e852c0dcc50a029a39ea7291b"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -1236,8 +1266,8 @@ gwdatafind = [
     {file = "gwdatafind-1.0.4.tar.gz", hash = "sha256:3b7b586a2fbe87dc3867c38699c50ad8028f8403a6689b21ac6229e0ac127492"},
 ]
 gwosc = [
-    {file = "gwosc-0.5.3-py3-none-any.whl", hash = "sha256:c23e9d88d07ea286a2715812d273a43b700e790ce4d900af7b132d51a8520025"},
-    {file = "gwosc-0.5.3.tar.gz", hash = "sha256:456f537528d1cb685b845502777d377f050399d7e5d6ce3d2c951d1e8de04ada"},
+    {file = "gwosc-0.5.5-py3-none-any.whl", hash = "sha256:c4737e9c99c2b2d4cb88526a26bd59887939ec8f663304f5fd57451e267d5b53"},
+    {file = "gwosc-0.5.5.tar.gz", hash = "sha256:5f1c53e1c65c105b980b0988ad4626f4ef97160be440e1ccaa07e42a239c6874"},
 ]
 gwpy = [
     {file = "gwpy-1.0.1-py2.py3-none-any.whl", hash = "sha256:f83d9f48f68a37aafd3546176d307416a2bf3206660481e7ab89dafdfd810aee"},
@@ -1482,6 +1512,27 @@ packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
     {file = "packaging-20.4.tar.gz", hash = "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"},
 ]
+pandas = [
+    {file = "pandas-0.25.3-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:df8864824b1fe488cf778c3650ee59c3a0d8f42e53707de167ba6b4f7d35f133"},
+    {file = "pandas-0.25.3-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:7458c48e3d15b8aaa7d575be60e1e4dd70348efcd9376656b72fecd55c59a4c3"},
+    {file = "pandas-0.25.3-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:61741f5aeb252f39c3031d11405305b6d10ce663c53bc3112705d7ad66c013d0"},
+    {file = "pandas-0.25.3-cp35-cp35m-win32.whl", hash = "sha256:adc3d3a3f9e59a38d923e90e20c4922fc62d1e5a03d083440468c6d8f3f1ae0a"},
+    {file = "pandas-0.25.3-cp35-cp35m-win_amd64.whl", hash = "sha256:975c461accd14e89d71772e89108a050fa824c0b87a67d34cedf245f6681fc17"},
+    {file = "pandas-0.25.3-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:ee50c2142cdcf41995655d499a157d0a812fce55c97d9aad13bc1eef837ed36c"},
+    {file = "pandas-0.25.3-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:4545467a637e0e1393f7d05d61dace89689ad6d6f66f267f86fff737b702cce9"},
+    {file = "pandas-0.25.3-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:bbe3eb765a0b1e578833d243e2814b60c825b7fdbf4cdfe8e8aae8a08ed56ecf"},
+    {file = "pandas-0.25.3-cp36-cp36m-win32.whl", hash = "sha256:8153705d6545fd9eb6dd2bc79301bff08825d2e2f716d5dced48daafc2d0b81f"},
+    {file = "pandas-0.25.3-cp36-cp36m-win_amd64.whl", hash = "sha256:26382aab9c119735908d94d2c5c08020a4a0a82969b7e5eefb92f902b3b30ad7"},
+    {file = "pandas-0.25.3-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:00dff3a8e337f5ed7ad295d98a31821d3d0fe7792da82d78d7fd79b89c03ea9d"},
+    {file = "pandas-0.25.3-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:e45055c30a608076e31a9fcd780a956ed3b1fa20db61561b8d88b79259f526f7"},
+    {file = "pandas-0.25.3-cp37-cp37m-win32.whl", hash = "sha256:255920e63850dc512ce356233081098554d641ba99c3767dde9e9f35630f994b"},
+    {file = "pandas-0.25.3-cp37-cp37m-win_amd64.whl", hash = "sha256:22361b1597c8c2ffd697aa9bf85423afa9e1fcfa6b1ea821054a244d5f24d75e"},
+    {file = "pandas-0.25.3-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:9962957a27bfb70ab64103d0a7b42fa59c642fb4ed4cb75d0227b7bb9228535d"},
+    {file = "pandas-0.25.3-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:78bf638993219311377ce9836b3dc05f627a666d0dbc8cec37c0ff3c9ada673b"},
+    {file = "pandas-0.25.3-cp38-cp38-win32.whl", hash = "sha256:6a3ac2c87e4e32a969921d1428525f09462770c349147aa8e9ab95f88c71ec71"},
+    {file = "pandas-0.25.3-cp38-cp38-win_amd64.whl", hash = "sha256:33970f4cacdd9a0ddb8f21e151bfb9f178afb7c36eb7c25b9094c02876f385c2"},
+    {file = "pandas-0.25.3.tar.gz", hash = "sha256:52da74df8a9c9a103af0a72c9d5fdc8e0183a90884278db7f386b5692a2220a4"},
+]
 pandocfilters = [
     {file = "pandocfilters-1.4.2.tar.gz", hash = "sha256:b3dd70e169bb5449e6bc6ff96aea89c5eea8c5f6ab5e207fc2f521a2cf4a0da9"},
 ]
@@ -1690,6 +1741,10 @@ scipy = [
     {file = "scipy-1.5.2-cp38-cp38-win32.whl", hash = "sha256:dac09281a0eacd59974e24525a3bc90fa39b4e95177e638a31b14db60d3fa806"},
     {file = "scipy-1.5.2-cp38-cp38-win_amd64.whl", hash = "sha256:92eb04041d371fea828858e4fff182453c25ae3eaa8782d9b6c32b25857d23bc"},
     {file = "scipy-1.5.2.tar.gz", hash = "sha256:066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6f90c9"},
+]
+seaborn = [
+    {file = "seaborn-0.10.1-py3-none-any.whl", hash = "sha256:c901ce494541fb4714cfa7db79d0232dc3f4c4dfd3f273bacf17816084df5b53"},
+    {file = "seaborn-0.10.1.tar.gz", hash = "sha256:2d1a0c9d6bd1bc3cadb0364b8f06540f51322a670cf8438d0fde1c1c7317adc0"},
 ]
 send2trash = [
     {file = "Send2Trash-1.5.0-py3-none-any.whl", hash = "sha256:f1691922577b6fa12821234aeb57599d887c4900b9ca537948d2dac34aea888b"},
