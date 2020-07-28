@@ -123,20 +123,13 @@ core count to tabulate statistics for all of the sky maps.
 
     for eventsfile in runs/*/*/events.sqlite
         do ligo-skymap-stats -d $eventsfile -o $(dirname $eventsfile)/allsky.dat \
-            $(dirname $eventsfile)/allsky/\*.fits --cosmology --contour 20 50 90 -j
+            $(find $(dirname $eventsfile)/allsky -name '*.fits' | sort -V) --cosmology --contour 20 50 90 -j
     done
 
 **[IGWN Grid]**: Run on a high core count head node.
 
 **[NASA HECC]**: Run under PBS. Use the same submit file commands as from the
 previous step.
-
-The `ligo-skymap-stats` script outputs rows in arbitrary order. To avoid large
-git diffs, run this command to sort the rows in the data files:
-
-    for f in runs/*/*/allsky.dat
-        do ./sort.py $f
-    done
 
 ## To update human-readable figures and tables
 
