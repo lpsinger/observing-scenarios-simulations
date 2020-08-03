@@ -1,0 +1,6 @@
+#/bin/sh
+#PBS -V -koed -l select=1:model=cas_ait -l walltime=08:00:00
+for eventsfile in runs/*/*/events.sqlite
+    do ligo-skymap-stats -d $eventsfile -o $(dirname $eventsfile)/allsky.dat \
+        $(find $(dirname $eventsfile)/allsky -name '*.fits' | sort -V) --cosmology --contour 20 50 90 -j
+done

@@ -1,0 +1,7 @@
+#/bin/sh
+#PBS -V -koed -l select=1:model=cas_ait -l walltime=08:00:00
+unset OMP_NUM_THREADS  # use default: number of logical processors
+for eventsfile in runs/*/*/events.xml.gz
+    do bayestar-localize-coincs $eventsfile -o $(dirname $eventsfile)/allsky \
+        --f-low 11 --cosmology
+done
