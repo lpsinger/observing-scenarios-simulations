@@ -67,7 +67,7 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 	--seed 1 -j -l error -o $(@F) $(<F) \
 	--reference-psd ../psds.xml \
 	--duty-cycle 0.7 --keep-subthreshold --measurement-error gaussian-noise \
-	--detector $(subst --,,$(filter --%,$(value $(word 1,$(subst /, ,$*))-psds)))
+	--detector $(subst --,,$(filter --%,$(value $(firstword $(subst /, ,$*))-psds)))
 
 
 #
