@@ -1,4 +1,4 @@
-RUNS = O3 O4 O5
+RUNS = O3
 POPS = bns_astro nsbh_astro bbh_astro
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -55,7 +55,7 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--distribution $(notdir $(@D)) --reference-psd ../psds.xml
+	--min-snr 2 --distribution $(notdir $(@D)) --reference-psd ../psds.xml
 
 
 #
@@ -66,6 +66,7 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-realize-coincs \
 	--seed 1 -j -l error -o $(@F) $(<F) \
 	--reference-psd ../psds.xml \
+	--snr-threshold 2 --net-snr-threshold 9 \
 	--duty-cycle 0.7 --keep-subthreshold --measurement-error gaussian-noise \
 	--detector $(subst --,,$(filter --%,$(value $(word 1,$(subst /, ,$*))-psds)))
 
