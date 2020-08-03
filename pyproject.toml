@@ -15,6 +15,7 @@ gwpy = "*"
 ipykernel = "*"
 ipython = "*"
 ipywidgets = "*"
+gracedb-sdk = "*"
 
 [tool.poetry.dev-dependencies]
 

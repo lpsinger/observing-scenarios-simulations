@@ -85,6 +85,14 @@ webencodings = "*"
 
 [[package]]
 category = "main"
+description = "Python package for providing Mozilla's CA Bundle."
+name = "certifi"
+optional = false
+python-versions = "*"
+version = "2020.6.20"
+
+[[package]]
+category = "main"
 description = "Foreign Function Interface for Python calling C code."
 name = "cffi"
 optional = false
@@ -93,6 +101,14 @@ version = "1.14.1"
 
 [package.dependencies]
 pycparser = "*"
+
+[[package]]
+category = "main"
+description = "Universal encoding detector for Python 2 and 3"
+name = "chardet"
+optional = false
+python-versions = "*"
+version = "3.0.4"
 
 [[package]]
 category = "main"
@@ -180,6 +196,17 @@ version = "0.18.2"
 
 [[package]]
 category = "main"
+description = "REST API SDK for GraceDB"
+name = "gracedb-sdk"
+optional = false
+python-versions = ">=3.6"
+version = "0.1.6"
+
+[package.dependencies]
+requests-gracedb = "*"
+
+[[package]]
+category = "main"
 description = "The client library for the LIGO Data Replicator (LDR) service."
 name = "gwdatafind"
 optional = false
@@ -255,6 +282,14 @@ matplotlib = "*"
 numpy = ">=1.13"
 scipy = "*"
 six = "*"
+
+[[package]]
+category = "main"
+description = "Internationalized Domain Names in Applications (IDNA)"
+name = "idna"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.10"
 
 [[package]]
 category = "main"
@@ -804,7 +839,7 @@ numpy = "*"
 [[package]]
 category = "main"
 description = "Run a subprocess in a pseudo terminal"
-marker = "sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\""
+marker = "python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\" and (python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\")"
 name = "ptyprocess"
 optional = false
 python-versions = "*"
@@ -959,6 +994,46 @@ testall = ["asdf", "gwcs", "pyvo", "sunpy", "shapely"]
 
 [[package]]
 category = "main"
+description = "Python HTTP for Humans."
+name = "requests"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "2.24.0"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+chardet = ">=3.0.2,<4"
+idna = ">=2.5,<3"
+urllib3 = ">=1.21.1,<1.25.0 || >1.25.0,<1.25.1 || >1.25.1,<1.26"
+
+[package.extras]
+security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)"]
+socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
+
+[[package]]
+category = "main"
+description = "generic connection pooling HTTP client for GraceDB and similar services"
+name = "requests-gracedb"
+optional = false
+python-versions = ">=2.7"
+version = "0.1.3"
+
+[package.dependencies]
+cryptography = "*"
+requests = "*"
+safe-netrc = "*"
+six = "*"
+
+[[package]]
+category = "main"
+description = "Safe netrc file parser"
+name = "safe-netrc"
+optional = false
+python-versions = "*"
+version = "1.0.0"
+
+[[package]]
+category = "main"
 description = "Bootstrap confidence interval estimation routines for SciPy"
 name = "scikits.bootstrap"
 optional = false
@@ -1071,6 +1146,19 @@ test = ["pytest", "mock"]
 
 [[package]]
 category = "main"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+name = "urllib3"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
+version = "1.25.10"
+
+[package.extras]
+brotli = ["brotlipy (>=0.6.0)"]
+secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0.14)", "ipaddress"]
+socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
+
+[[package]]
+category = "main"
 description = "Measures the displayed width of unicode strings in a terminal"
 name = "wcwidth"
 optional = false
@@ -1110,7 +1198,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "1af85b28b5ea09690fd97dbf3aa1d6f14d077e2e852c0dcc50a029a39ea7291b"
+content-hash = "72a75c932e275ffb4cbf05861090ec65a71ff51b1074b6385e4dcabc521ef61f"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -1183,6 +1271,10 @@ bleach = [
     {file = "bleach-3.1.5-py2.py3-none-any.whl", hash = "sha256:2bce3d8fab545a6528c8fa5d9f9ae8ebc85a56da365c7f85180bfe96a35ef22f"},
     {file = "bleach-3.1.5.tar.gz", hash = "sha256:3c4c520fdb9db59ef139915a5db79f8b51bc2a7257ea0389f30c846883430a4b"},
 ]
+certifi = [
+    {file = "certifi-2020.6.20-py2.py3-none-any.whl", hash = "sha256:8fc0819f1f30ba15bdb34cceffb9ef04d99f420f68eb75d901e9560b8749fc41"},
+    {file = "certifi-2020.6.20.tar.gz", hash = "sha256:5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3"},
+]
 cffi = [
     {file = "cffi-1.14.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:66dd45eb9530e3dde8f7c009f84568bc7cac489b93d04ac86e3111fb46e470c2"},
     {file = "cffi-1.14.1-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:4f53e4128c81ca3212ff4cf097c797ab44646a40b42ec02a891155cd7a2ba4d8"},
@@ -1212,6 +1304,10 @@ cffi = [
     {file = "cffi-1.14.1-cp38-cp38-win32.whl", hash = "sha256:6923d077d9ae9e8bacbdb1c07ae78405a9306c8fd1af13bfa06ca891095eb995"},
     {file = "cffi-1.14.1-cp38-cp38-win_amd64.whl", hash = "sha256:b1d6ebc891607e71fd9da71688fcf332a6630b7f5b7f5549e6e631821c0e5d90"},
     {file = "cffi-1.14.1.tar.gz", hash = "sha256:b2a2b0d276a136146e012154baefaea2758ef1f56ae9f4e01c612b0831e0bd2f"},
+]
+chardet = [
+    {file = "chardet-3.0.4-py2.py3-none-any.whl", hash = "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"},
+    {file = "chardet-3.0.4.tar.gz", hash = "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae"},
 ]
 colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
@@ -1260,6 +1356,10 @@ entrypoints = [
 ]
 future = [
     {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},
+]
+gracedb-sdk = [
+    {file = "gracedb-sdk-0.1.6.tar.gz", hash = "sha256:377b8f35486df5550d89f44ef0fd636395bf9a21e1257960fdc141138babaa9a"},
+    {file = "gracedb_sdk-0.1.6-py3-none-any.whl", hash = "sha256:e35e31d2534849b931c2bc5c74a13af023e85e0236869448e5288e846ffb26ed"},
 ]
 gwdatafind = [
     {file = "gwdatafind-1.0.4-py2.py3-none-any.whl", hash = "sha256:5ab0fb818b22a9f10064cfa072967727a8072d7f7d0a3b96c83907e8ce7bd5b6"},
@@ -1318,6 +1418,10 @@ healpy = [
     {file = "healpy-1.14.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:5cb4df677cc0dfe2eb258958b7e5803c547eb727923dec8aa5719128877c570a"},
     {file = "healpy-1.14.0-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:9e3fee68014e76c8f1866e1673806b63304402db3bb44bc29eebf9e6a048b186"},
     {file = "healpy-1.14.0.tar.gz", hash = "sha256:2720b5f96c314bdfdd20b6ffc0643ac8091faefcf8fd20a4083cedff85a66c5e"},
+]
+idna = [
+    {file = "idna-2.10-py2.py3-none-any.whl", hash = "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"},
+    {file = "idna-2.10.tar.gz", hash = "sha256:b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"},
 ]
 importlib-metadata = [
     {file = "importlib_metadata-1.7.0-py2.py3-none-any.whl", hash = "sha256:dc15b2969b4ce36305c51eebe62d418ac7791e9a157911d58bfb1f9ccd8e2070"},
@@ -1719,6 +1823,18 @@ reproject = [
     {file = "reproject-0.7.1-cp38-cp38-win_amd64.whl", hash = "sha256:3d995fb0665058b3cd5fef7c6982b488c52597051cefb2e03ead03a285c271bd"},
     {file = "reproject-0.7.1.tar.gz", hash = "sha256:95c0fa49e6b4e36455b91fa09ad1b71b230c990ad91d948af67ea3509a1a4ccb"},
 ]
+requests = [
+    {file = "requests-2.24.0-py2.py3-none-any.whl", hash = "sha256:fe75cc94a9443b9246fc7049224f75604b113c36acb93f87b80ed42c44cbb898"},
+    {file = "requests-2.24.0.tar.gz", hash = "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b"},
+]
+requests-gracedb = [
+    {file = "requests-gracedb-0.1.3.tar.gz", hash = "sha256:8039368c8ac7d34d7b46c16068f1b4fc9eb4591163a7226e7af99189efc12d83"},
+    {file = "requests_gracedb-0.1.3-py2.py3-none-any.whl", hash = "sha256:9e74f36a61a07b9240429d0fc6585a150b230913006bcb612e521265ef892133"},
+]
+safe-netrc = [
+    {file = "safe-netrc-1.0.0.tar.gz", hash = "sha256:55fe78dfc8bda48ee5b26c930a8efdecbb7ff5b5a45e2552381c84f13bb4a98a"},
+    {file = "safe_netrc-1.0.0-py2.py3-none-any.whl", hash = "sha256:5011368564eabd3accc196e499de111e4403c29f48eb6c60a3141b6ad507eb50"},
+]
 "scikits.bootstrap" = [
     {file = "scikits.bootstrap-1.0.1-py2-none-any.whl", hash = "sha256:b69636cc5da37260c32f0979c9c877e1fda7383e57e3d13296ea39a2514a14f9"},
     {file = "scikits.bootstrap-1.0.1-py3-none-any.whl", hash = "sha256:079a009ecd67534efcafd29d3d7e66175ce3be9c9c8964f0084e1e3c5397b99c"},
@@ -1780,6 +1896,10 @@ tqdm = [
 traitlets = [
     {file = "traitlets-4.3.3-py2.py3-none-any.whl", hash = "sha256:70b4c6a1d9019d7b4f6846832288f86998aa3b9207c6821f3578a6a6a467fe44"},
     {file = "traitlets-4.3.3.tar.gz", hash = "sha256:d023ee369ddd2763310e4c3eae1ff649689440d4ae59d7485eb4cfbbe3e359f7"},
+]
+urllib3 = [
+    {file = "urllib3-1.25.10-py2.py3-none-any.whl", hash = "sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461"},
+    {file = "urllib3-1.25.10.tar.gz", hash = "sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
