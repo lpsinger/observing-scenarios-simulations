@@ -1,4 +1,4 @@
-RUNS = O3 O4 O5
+RUNS = O3
 POPS = bns_astro nsbh_astro bbh_astro
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -66,6 +66,8 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-realize-coincs \
 	--seed 1 -j -l error -o $(@F) $(<F) \
 	--reference-psd ../psds.xml \
+	--net-snr-threshold 9 \
+	--min-triggers $(if $(filter bns_astro,$(word 2,$(subst /, ,$*))),1,2) \
 	--duty-cycle 0.7 --keep-subthreshold --measurement-error gaussian-noise \
 	--detector $(subst --,,$(filter --%,$(value $(firstword $(subst /, ,$*))-psds)))
 
