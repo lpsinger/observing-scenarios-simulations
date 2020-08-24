@@ -1,8 +1,9 @@
 # Python runtime
 __pycache__
 
-# PyCharm project files
+# IDE project files
 .idea
+.vscode
 
 # JupyterLab
 .ipynb_checkpoints
