@@ -16,6 +16,7 @@ ipykernel = "*"
 ipython = "*"
 ipywidgets = "*"
 gracedb-sdk = "*"
+lxml = "*"
 
 [tool.poetry.dev-dependencies]
 

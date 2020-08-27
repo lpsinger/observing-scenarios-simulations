@@ -2,13 +2,20 @@ RUNS = O3 O4 O5
 POPS = bns_astro nsbh_astro bbh_astro
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
-all: psds injections
+all: psds injections public-alerts.dat
 
 psds: $(foreach run,$(RUNS),runs/$(run)/psds.xml)
 
 injections: $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FILENAMES),runs/$(run)/$(pop)/$(filename))))
 
 .PHONY: all psds injections
+
+#
+# Tabulate O3 public alerts.
+#
+
+public-alerts.dat:
+	./get-public-alerts.py
 
 
 #
