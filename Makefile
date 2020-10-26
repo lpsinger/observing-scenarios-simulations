@@ -62,7 +62,8 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--min-snr 1 --distribution $(notdir $(@D)) --reference-psd ../psds.xml
+	--min-snr 1 --distribution $(notdir $(@D)) --reference-psd ../psds.xml \
+	--nsamples 1000000
 
 
 #
