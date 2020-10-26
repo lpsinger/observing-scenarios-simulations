@@ -5,7 +5,7 @@ description = "LIGO/Virgo/KAGRA observing scenarios simulations"
 authors = ["Leo Singer <leo.singer@ligo.org>"]
 
 [tool.poetry.dependencies]
-astropy = "<4.0.2"  # https://github.com/astropy/astroplan/issues/479
+astropy = "^3.2"
 astroplan = {version = "*", allow-prereleases = true}
 python = "^3.6.1"
 scipy = "*"
