@@ -1,4 +1,4 @@
-RUNS = O3 O4 O5
+RUNS = O3 O4 O5 O6
 POPS = bns_astro nsbh_astro bbh_astro
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -34,6 +34,12 @@ O4-psds = \
 O5-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
+	--V1 avirgo_O5high_NEW.txt \
+	--K1 kagra_128Mpc.txt
+O6-psds = \
+	--H1 AplusDesign.txt \
+	--L1 AplusDesign.txt \
+	--I1 AplusDesign.txt \
 	--V1 avirgo_O5high_NEW.txt \
 	--K1 kagra_128Mpc.txt
 
