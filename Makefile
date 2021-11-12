@@ -34,7 +34,7 @@ O4-psds = \
 O5-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
-	--V1 avirgo_O5high_NEW.txt \
+	--V1 avirgo_O5low_NEW.txt \
 	--K1 kagra_128Mpc.txt
 O6-psds = \
 	--H1 AplusDesign.txt \
