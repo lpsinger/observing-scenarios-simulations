@@ -5,12 +5,12 @@ description = "LIGO/Virgo/KAGRA observing scenarios simulations"
 authors = ["Leo Singer <leo.singer@ligo.org>"]
 
 [tool.poetry.dependencies]
-astropy = "^4.1"
-astroplan = {git = "https://github.com/astropy/astroplan"}  # https://github.com/astropy/astroplan/issues/479
-python = "^3.6.1"
+astropy = ">=4.1"
+astroplan = "*"
+python = ">=3.7"
 scipy = "*"
 seaborn = "*"
-"ligo.skymap" = "^0.5.0"
+"ligo.skymap" = ">=0.5.0"
 "scikits.bootstrap" = "*"
 gwpy = "*"
 ipykernel = "*"
