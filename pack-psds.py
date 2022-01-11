@@ -38,7 +38,7 @@ for name in detector_names:
 
     fgrid = np.arange(f0, fmax, df)
     series = lal.CreateREAL8FrequencySeries(
-        psd_file.name, 0, f0, df, lal.SecondUnit, len(fgrid))
+        (psd_file.name).split(".")[0], 0, f0, df, lal.SecondUnit, len(fgrid))
     series.data.data = np.exp(np.interp(np.log(fgrid), np.log(f), np.log(psd)))
 
     psds[name] = series
