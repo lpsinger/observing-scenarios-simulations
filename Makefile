@@ -1,5 +1,5 @@
 RUNS = O3 O4 O5 O6
-POPS = bns_astro nsbh_astro bbh_astro
+POPS = bns_astro nsbh_astro bbh_astro farah
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -63,8 +63,30 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 
 #
+# Download samples from the Farah distribution.
+# FIXME: this document must be public!
+#
+
+O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
+	curl -OL https://dcc.ligo.org/T2100512-v7/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5
+
+
+#
+# Convert the Farah samples to the format needed by bayestar-inject.
+#
+
+farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 farah.py
+	./farah.py $< $@
+
+
+#
 # Generate astrophysical distribution.
 #
+
+runs/%/farah/injections.xml: $$(dir $$(@D))psds.xml farah.h5
+	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
+	--snr-threshold 1 --distribution-samples ../../../farah.h5 --reference-psd ../psds.xml \
+	--nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
