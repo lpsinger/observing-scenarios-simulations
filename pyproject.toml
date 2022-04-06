@@ -7,7 +7,7 @@ authors = ["Leo Singer <leo.singer@ligo.org>"]
 [tool.poetry.dependencies]
 astropy = ">=4.1"
 astroplan = "*"
-python = ">=3.8"
+python = ">=3.8, <4"
 scipy = "*"
 seaborn = "*"
 "ligo.skymap" = ">=0.5.0"

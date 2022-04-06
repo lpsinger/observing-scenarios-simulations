@@ -1177,11 +1177,11 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "pyrxp"
-version = "2.2.1"
+version = "3.0.1"
 description = "Python RXP interface - fast validating XML parser"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6, <4"
 
 [[package]]
 name = "python-dateutil"
@@ -1507,13 +1507,14 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "urllib3"
-version = "1.22"
+version = "1.26.9"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 
 [package.extras]
+brotli = ["brotlicffi (>=0.8.0)", "brotli (>=1.0.9)", "brotlipy (>=0.6.0)"]
 secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "certifi", "ipaddress"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
@@ -1558,8 +1559,8 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.8"
-content-hash = "09b4d84d64df804a0823ddfd7ca99213747994d752613f640dbcabbe026de194"
+python-versions = ">=3.8, <4"
+content-hash = "03e93b14f2654180839f6f98775b15529a358918259b32d817b2ebe30940b167"
 
 [metadata.files]
 appnope = [
@@ -2398,38 +2399,50 @@ pyrsistent = [
     {file = "pyrsistent-0.18.1.tar.gz", hash = "sha256:d4d61f8b993a7255ba714df3aca52700f8125289f84f704cf80916517c46eb96"},
 ]
 pyrxp = [
-    {file = "pyRXP-2.2.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:2e7b8d56694835930eded355bd5b20c6cebdd7154dd400309f75c0ab54633c54"},
-    {file = "pyRXP-2.2.1-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:578995455b5b130088a246b63a4f3e19051b204ae6b0f76e99bf47720b909158"},
-    {file = "pyRXP-2.2.1-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:560f790c51b0374663d5b29576cee1cfb03d10e93651c0f950193ffe2fb308fb"},
-    {file = "pyRXP-2.2.1-cp27-cp27m-win32.whl", hash = "sha256:86acee8993e01503223d1ea7720d0e025c28a484dd312ef8fdbe3d3fa33e401f"},
-    {file = "pyRXP-2.2.1-cp27-cp27m-win_amd64.whl", hash = "sha256:673c216cff1b23d6d1b4af5265bf5fd8907d7dd9e18647d31d55da8d9e89056e"},
-    {file = "pyRXP-2.2.1-cp27-cp27mu-manylinux2010_i686.whl", hash = "sha256:c15f3f71d962486ba253778131540490003848f4025cce62828e21853e207a2b"},
-    {file = "pyRXP-2.2.1-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:8545d863f10f648ae291635d6569742f53110ac1cc3def7774b790661e61b2f1"},
-    {file = "pyRXP-2.2.1-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:27bbab881764057850a625902fc56936826dca1ffbe17018fc4a6671e24a5cb4"},
-    {file = "pyRXP-2.2.1-cp35-cp35m-manylinux2010_i686.whl", hash = "sha256:644b0fa0821575d297a21c8fc4d7ba1c1891a572c73dcd89daeb378f3de4988d"},
-    {file = "pyRXP-2.2.1-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:38752b07b8e2d6f475ca1230d85aa9b3425de3fa9b07c404599ce758b6ee250e"},
-    {file = "pyRXP-2.2.1-cp35-cp35m-win32.whl", hash = "sha256:a6d0b9ed5f3d3c564a370e925eccb7a5751b818b83c596829d74d5356cca7d4d"},
-    {file = "pyRXP-2.2.1-cp35-cp35m-win_amd64.whl", hash = "sha256:e2dbdfb80ebf43e82547e860b71472738b8839d9de780d7f970b47b2384fedfa"},
-    {file = "pyRXP-2.2.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:44ceb64636aded18e5d2db187f7ae35649e39c64c64da95ce63a1967bcf62a83"},
-    {file = "pyRXP-2.2.1-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:5385e605e4cb62de17f69884ce9c9c70c4ad35f3e37f05bba6ea213bef9ecfe3"},
-    {file = "pyRXP-2.2.1-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:d826e27daf7f2e616b1f6fb1c00e4773f912a63292b3a4c352c4ce988606fed5"},
-    {file = "pyRXP-2.2.1-cp36-cp36m-win32.whl", hash = "sha256:934289ecfe2aa374eb1de930a058fb086dc4c8d0acaa7e74385948ffa4e582ac"},
-    {file = "pyRXP-2.2.1-cp36-cp36m-win_amd64.whl", hash = "sha256:4cb3cca08fc323b1eb831aa89459e0e0f576182dbf9f47c5353d01944e6d1147"},
-    {file = "pyRXP-2.2.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:80ce1e6141cac0a918bcd7400fb7d01feacb6f8e9c5bf50c12216e1ec80841c0"},
-    {file = "pyRXP-2.2.1-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:e4dde7e6d13b450a6fed578048ae36e3e5689a4e3f58c6c3b98b268929fc0ed1"},
-    {file = "pyRXP-2.2.1-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:991c615e3213356bb162fb1278aed2683e5468c271899b175f66257d354175e0"},
-    {file = "pyRXP-2.2.1-cp37-cp37m-win32.whl", hash = "sha256:8fb9329c57ccb4a7e6df3bb8a81b6cf7842e417c32070eb6b8c54736fbb7dc71"},
-    {file = "pyRXP-2.2.1-cp37-cp37m-win_amd64.whl", hash = "sha256:cb356df98c1723dd5c601ce491a0c890147dbb0f34b0f93dffd830ac4808f7bd"},
-    {file = "pyRXP-2.2.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:27071080328e2eaa654411f77b9dc2b5f16ce23c5c5e98203a979f77bb06cbd3"},
-    {file = "pyRXP-2.2.1-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:1f01bd80ac7315a272d93a780ebada33fcc70857bedd1acb8ad8ebc5a9e09d8e"},
-    {file = "pyRXP-2.2.1-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:54eb52b877a3b3b9b5c6ff5d111ee883e9cb93cb6f63530f05f8e11acdc73f35"},
-    {file = "pyRXP-2.2.1-cp38-cp38-win32.whl", hash = "sha256:75b5ea27b0597711c7a395ea912ca5ccc983495d5a28035769f17ccff0469db5"},
-    {file = "pyRXP-2.2.1-cp38-cp38-win_amd64.whl", hash = "sha256:66fa4197ee9788739c1678c0b3ad6582caf49c543435331640075bd0804efa4b"},
-    {file = "pyRXP-2.2.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:84f6ab976ffc3df31eede9d86ab4e3dd3792260f5330e5cd7f313b533d0b1e39"},
-    {file = "pyRXP-2.2.1-cp39-cp39-manylinux2010_i686.whl", hash = "sha256:b6273c00a1e764e24b2377078f93e77e58f8989dc675e83605426afa4fe4c950"},
-    {file = "pyRXP-2.2.1-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:b2bdc98a2590107b83ded1312ba601166d9b59a5eb1a3a5c23b6fa7ac9461f39"},
-    {file = "pyRXP-2.2.1-cp39-cp39-win32.whl", hash = "sha256:a6b05649ed1076c01908cf18c2a9708b94fc92a5e5c379a4c19f1ee88221f7ca"},
-    {file = "pyRXP-2.2.1-cp39-cp39-win_amd64.whl", hash = "sha256:3f73ff94aaffdbbffafecacb0aa0081d73fc99c8b77136c1bff4701f5aa372ea"},
+    {file = "pyRXP-3.0.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:40973ef800f70705cfd06657f2b10b1e996091bed9f6b6fd51dc12378b6284bf"},
+    {file = "pyRXP-3.0.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9aaec7310ea182fdfcb999d23bb0dbbd012fbc7b92b9ffa4c115813e26f63e07"},
+    {file = "pyRXP-3.0.1-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bd080847e805f8d71ec291d91d90175a0d38a022dda675570eee154b87b409f3"},
+    {file = "pyRXP-3.0.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:6e043c3d99b0170fd97d4ada1661ddd74662a6c5b6cdea9790614bb97f7946c0"},
+    {file = "pyRXP-3.0.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:39334516e95597d3daca912e874fee834c7396c74990c2ecc449821b429dc366"},
+    {file = "pyRXP-3.0.1-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:7bb7836f9c936dff0fe529bfa9b9a18dffd7f3f6c259cbd38be6e2f3ece503a5"},
+    {file = "pyRXP-3.0.1-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:d29dfca11d3928f9b3d01c08537e9fa0ca7b940be6a9138b135ad96998ec1aaa"},
+    {file = "pyRXP-3.0.1-cp310-cp310-win32.whl", hash = "sha256:2294f7660baf7dd547850a6364535854a6c51a2eed4424630c6e3cd2c7e77f9a"},
+    {file = "pyRXP-3.0.1-cp310-cp310-win_amd64.whl", hash = "sha256:e5f66156dfd30d23833bb6b6346df8e52fdc1d9835c17a725803295d98babb54"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:ced9889ba7ecb4ad9d3f82fe5877ac0f9a35d780179bc7850c491a26d5525f05"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9842a30c77b24955af43f463ee451b0c8ff197d64d96c3efb070eb8da76ba655"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:83dda8920ec161aac483a39842942c9a9cf566e865aede018612636975b6302b"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:815e8d27e54e079265a4896dad7998fde5239a0f265b6711f85fa3a1a8b69f40"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:78ce2948e5b2fbf11685ab803eeb74445b6444165ad3e8e22fc4f1cafd975e60"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:9f009f847408c1ea41676f86a53cd4cfdef170d81ca911de246956040ef61db6"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-win32.whl", hash = "sha256:07c78a5d219fbf0d63ac5166e1a5ae0c4d2488faedd2c754a0e2c4050ced4b1d"},
+    {file = "pyRXP-3.0.1-cp36-cp36m-win_amd64.whl", hash = "sha256:cbe3d00b13394dfa1161bb071207f5e07aef9a5cdf73d13d37f3f12ed5f945b4"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a94b24f23062f0271113cfa0730249b03d6340e69d4a1e11d7ad0749764ecaed"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:4ef688baadd6d85b7296f0b505663fd170bdf4cf65f6353e4d9420f9d89328f9"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:631272e6c684972c4f124fd35eaf2d3ce8d251101583f5080aadebd32e5edeea"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b0baf3201c734009002660856bef297a8ae3f65e6806c2cc2d33ee61d4b012c7"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:564b950b90442732e7a67016e31f5bf451d85ee5fa303a8608e26a40f9e6e6e9"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:ffd1772f7576b28cf6d055da8ad718547cfff8e7f44d541421c1c120616e5752"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-win32.whl", hash = "sha256:c64ba3b0d59016fe285e9388958ad85a8573e891a389fe4444583de6947a3ee3"},
+    {file = "pyRXP-3.0.1-cp37-cp37m-win_amd64.whl", hash = "sha256:10d20b493d0004173f3f27cf67008e7cad7e7c89f044a5defa4bcc42fdb7eed7"},
+    {file = "pyRXP-3.0.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:cc4bb70997859349e31496aa89680acd96af2aff897f79eec1c5b7b836d60df4"},
+    {file = "pyRXP-3.0.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:a56b47de7b42c5dff1c2367cde4fb6fb61fd49137160b47f9b4617e844e179e1"},
+    {file = "pyRXP-3.0.1-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5e634c1a9b7195f12e0066cef9b5e557d6c7cfd65f832ff99da7ad639db5017d"},
+    {file = "pyRXP-3.0.1-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:982cb04107e446bd7179c24128f3608eaee0e4f0e913b17cc894b96a60e41206"},
+    {file = "pyRXP-3.0.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:04740ed9fef50f9228c3b6f1cc32c2ab27f833270371dc500d40918a5f79ec36"},
+    {file = "pyRXP-3.0.1-cp38-cp38-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:67a987f845e35b2323090ab455dab5df3d67d87187790ce691fba4bd4f41291d"},
+    {file = "pyRXP-3.0.1-cp38-cp38-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:26837099923ffc983f90254a7e29ba4ab0b1ff22422153de69aea028b71823ba"},
+    {file = "pyRXP-3.0.1-cp38-cp38-win32.whl", hash = "sha256:5d5cf756bf22a2b5078968c9820ad1522f8fc5b25797938ff0fa6cd9bb5e71e5"},
+    {file = "pyRXP-3.0.1-cp38-cp38-win_amd64.whl", hash = "sha256:eb1fec86ef5808004ff3c5d3c34bb94da51ca014e7c2532156c788f281145f65"},
+    {file = "pyRXP-3.0.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:120bbdc48358fc1c22dcc9671ce1e049803d091e848a16a03cfdd2710671754e"},
+    {file = "pyRXP-3.0.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:d680baf500141eb80ddccc923e5a490ae712326b82ecebce2a86edd6f8900f7f"},
+    {file = "pyRXP-3.0.1-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cec46b19f7cec2c49ec5cf2b95a90657198eebd9822711e54e420cb27b5ad395"},
+    {file = "pyRXP-3.0.1-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:c0f63283308f3ac7ef80e0cc959cd06459fdbaaae086a56c7a1a10e7419fb535"},
+    {file = "pyRXP-3.0.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:229a000d0414c8d47ad3ed632793626ac0053c1d41ff8551ba464cc5df282e58"},
+    {file = "pyRXP-3.0.1-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:73dc982d7cdeb176f02196c4783c11bcdc07b44cbd8f76902e917198063373c0"},
+    {file = "pyRXP-3.0.1-cp39-cp39-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:a2d456cade037e6655571bad383d43a9494cd5f0f061fa7e4a8543c61a249fe6"},
+    {file = "pyRXP-3.0.1-cp39-cp39-win32.whl", hash = "sha256:331a42a4fc067438e9e1997c0a439ddb1f27d1d9d57f33bc3be9e024516e9d4e"},
+    {file = "pyRXP-3.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:f02185da19c7e24bead96cdd599177590b91f53ff70ed5c788f218877484cfb5"},
+    {file = "pyRXP-3.0.1.tar.gz", hash = "sha256:f5563dee342f329f840380aafccf786b504d6a82e91611defb27f3f51043be9a"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
@@ -2688,8 +2701,8 @@ typing-extensions = [
     {file = "typing_extensions-4.1.1.tar.gz", hash = "sha256:1a9462dcc3347a79b1f1c0271fbe79e844580bb598bafa1ed208b94da3cdcd42"},
 ]
 urllib3 = [
-    {file = "urllib3-1.22-py2.py3-none-any.whl", hash = "sha256:06330f386d6e4b195fbfc736b297f58c5a892e4440e54d294d7004e3a9bbea1b"},
-    {file = "urllib3-1.22.tar.gz", hash = "sha256:cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"},
+    {file = "urllib3-1.26.9-py2.py3-none-any.whl", hash = "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14"},
+    {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
