@@ -68,7 +68,7 @@ runs/%/psds.xml: $$(call psd_files,%)
 #
 
 O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
-	curl -OL https://dcc.ligo.org/public/0180/T2100512/008/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events.h5
+	curl -OL https://dcc.ligo.org/LIGO-T2100512/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events.h5
 
 
 #
