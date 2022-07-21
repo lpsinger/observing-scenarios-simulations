@@ -425,7 +425,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "igwn-auth-utils"
-version = "0.2.2"
+version = "0.2.3"
 description = "Authorisation utilities for IGWN"
 category = "main"
 optional = false
@@ -438,7 +438,7 @@ safe-netrc = {version = ">=1.0.0", optional = true, markers = "extra == \"reques
 scitokens = ">=1.7.0"
 
 [package.extras]
-docs = ["sphinx (>=4.0.0)", "sphinx-automodapi", "sphinx-material"]
+docs = ["sphinx (>=4.0.0)", "sphinx-immaterial-igwn"]
 lint = ["flake8 (>=3.7.0)", "flake8-bandit"]
 requests = ["requests (>=2.14)", "safe-netrc (>=1.0.0)"]
 test = ["pytest (>=3.9.1)", "pytest-cov", "requests (>=2.14)", "requests-mock", "safe-netrc (>=1.0.0)"]
@@ -903,7 +903,7 @@ test = ["pytest (>=7.1)", "pytest-cov (>=3.0)", "codecov (>=2.1)"]
 
 [[package]]
 name = "notebook"
-version = "6.4.11"
+version = "6.4.12"
 description = "A web-based notebook environment for interactive computing"
 category = "main"
 optional = false
@@ -1872,8 +1872,8 @@ idna = [
     {file = "idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
 ]
 igwn-auth-utils = [
-    {file = "igwn-auth-utils-0.2.2.tar.gz", hash = "sha256:96fff480f59cf143122595ecc9195d2205e24deecc90761fd3c50d34eca8a0ab"},
-    {file = "igwn_auth_utils-0.2.2-py3-none-any.whl", hash = "sha256:d153899cd2fa5d3d7212764f69ebdf2857e9ae38af52c466d3cfe27c64ecc4b1"},
+    {file = "igwn-auth-utils-0.2.3.tar.gz", hash = "sha256:17ea61ef47dd642a572e887f37f5181613d8882ed4b917b1279cdb188859de3c"},
+    {file = "igwn_auth_utils-0.2.3-py3-none-any.whl", hash = "sha256:8c26e62f59673e7bc67304768706fdae029cbd4516b9885061d417c331766710"},
 ]
 importlib-resources = [
     {file = "importlib_resources-5.7.1-py3-none-any.whl", hash = "sha256:e447dc01619b1e951286f3929be820029d48c75eb25d265c28b92a16548212b8"},
@@ -2169,8 +2169,8 @@ networkx = [
     {file = "networkx-2.8.2.tar.gz", hash = "sha256:ae99c9b0d35e5b4a62cf1cfea01e5b3633d8d02f4a0ead69685b6e7de5b85eab"},
 ]
 notebook = [
-    {file = "notebook-6.4.11-py3-none-any.whl", hash = "sha256:b4a6baf2eba21ce67a0ca11a793d1781b06b8078f34d06c710742e55f3eee505"},
-    {file = "notebook-6.4.11.tar.gz", hash = "sha256:709b1856a564fe53054796c80e17a67262071c86bfbdfa6b96aaa346113c555a"},
+    {file = "notebook-6.4.12-py3-none-any.whl", hash = "sha256:8c07a3bb7640e371f8a609bdbb2366a1976c6a2589da8ef917f761a61e3ad8b1"},
+    {file = "notebook-6.4.12.tar.gz", hash = "sha256:6268c9ec9048cff7a45405c990c29ac9ca40b0bc3ec29263d218c5e01f2b4e86"},
 ]
 numpy = [
     {file = "numpy-1.22.4-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:ba9ead61dfb5d971d77b6c131a9dbee62294a932bf6a356e48c75ae684e635b3"},
