@@ -67,7 +67,7 @@ runs/%/psds.xml: $$(call psd_files,%)
 # FIXME: this document must be public!
 #
 
-O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
+O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events.h5:
 	curl -OL https://dcc.ligo.org/LIGO-T2100512/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events.h5
 
 
@@ -75,7 +75,7 @@ O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
 # Convert the Farah samples to the format needed by bayestar-inject.
 #
 
-farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 farah.py
+farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events.h5 farah.py
 	./farah.py $< $@
 
 
