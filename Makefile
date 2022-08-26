@@ -1,5 +1,5 @@
-RUNS = O3 O4 O5 O6
-POPS = bns_astro nsbh_astro bbh_astro farah
+RUNS = O3 O4 O5
+POPS = farah
 FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
