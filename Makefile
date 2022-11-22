@@ -19,7 +19,7 @@ public-alerts.dat:
 
 
 #
-# PSD files to use from LIGO-T2000012.
+# PSD files to use from LIGO-T2200043.
 #
 
 O3-psds = \
