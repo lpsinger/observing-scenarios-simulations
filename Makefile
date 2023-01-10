@@ -27,10 +27,10 @@ O3-psds = \
 	--L1 aligo_O3actual_L1.txt \
 	--V1 avirgo_O3actual.txt
 O4-psds = \
-	--H1 aligo_O4high.txt \
-	--L1 aligo_O4high.txt \
-	--V1 avirgo_O4high_NEW.txt \
-	--K1 kagra_10Mpc.txt
+	--H1 aligo_O4low.txt \
+	--L1 aligo_O4low.txt \
+	--V1 O4_Virgo_78.txt \
+	--K1 kagra_3Mpc.txt
 O5-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
@@ -49,7 +49,7 @@ O6-psds = \
 #
 
 %.txt:
-	curl -L https://dcc.ligo.org/LIGO-T2200043/public/$(@F) > $@
+	curl -L https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F) > $@
 
 
 #
