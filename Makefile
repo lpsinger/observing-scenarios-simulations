@@ -1,6 +1,6 @@
 RUNS = O3 O4 O5
 POPS = farah
-FILENAMES = events.xml.gz events.sqlite injections.dat coincs.dat
+FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
 
@@ -108,6 +108,13 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 	--duty-cycle 0.7 --keep-subthreshold --measurement-error gaussian-noise \
 	--detector $(subst --,,$(filter --%,$(value $(firstword $(subst /, ,$*))-psds)))
 
+
+#
+# Split detected signals file into individual files, one file per event.
+#
+
+runs/%/events: runs/%/events.xml.gz
+	scripts/split-events.py $< $@
 
 #
 # Convert simulated signals to SQLite format.
