@@ -15,7 +15,7 @@ injections: $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FIL
 #
 
 public-alerts.dat:
-	./get-public-alerts.py
+	scripts/get-public-alerts.py
 
 
 #
@@ -59,7 +59,7 @@ O6-psds = \
 .SECONDEXPANSION:
 psd_files = $(sort $(filter-out --%,$(value $(1)-psds)))
 runs/%/psds.xml: $$(call psd_files,%)
-	mkdir -p $(@D) && ./pack-psds.py -o $@ $(value $*-psds)
+	mkdir -p $(@D) && scripts/pack-psds.py -o $@ $(value $*-psds)
 
 
 #
@@ -75,8 +75,8 @@ O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
 # Convert the Farah samples to the format needed by bayestar-inject.
 #
 
-farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 farah.py
-	./farah.py $< $@
+farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 scripts/farah.py
+	scripts/farah.py $< $@
 
 
 #
