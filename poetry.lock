@@ -560,27 +560,6 @@ files = [
 ]
 
 [[package]]
-name = "dqsegdb2"
-version = "1.1.3"
-description = "Simplified python interface to DQSEGDB"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "dqsegdb2-1.1.3-py3-none-any.whl", hash = "sha256:0bc012e8830082222f3c8ea41bd535599c526af34e97c07fb4236d08d36a38c9"},
-    {file = "dqsegdb2-1.1.3.tar.gz", hash = "sha256:1c731a7f7db78d578edf7256e5b12804f70523f0fc1fdd683ccbeee4acce7fc3"},
-]
-
-[package.dependencies]
-igwn-auth-utils = ">=0.3.1"
-ligo-segments = ">=1.0.0"
-
-[package.extras]
-docs = ["sphinx", "sphinx-automodapi", "sphinx-immaterial"]
-lint = ["flake8 (>=3.7.0)", "flake8-bandit"]
-test = ["pytest (>=2.9.2)", "pytest-cov (>=2.5.1)", "requests-mock (>=1.5.0)"]
-
-[[package]]
 name = "executing"
 version = "1.2.0"
 description = "Get the currently executing AST node of a frame, and other information"
@@ -649,80 +628,6 @@ requests-gracedb = "*"
 
 [package.extras]
 test = ["pytest"]
-
-[[package]]
-name = "gwdatafind"
-version = "1.1.3"
-description = "The GWDataFind data discovery client"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "gwdatafind-1.1.3-py3-none-any.whl", hash = "sha256:051f59e351241610619bcad9dc04f8feaa063057342a558a66db61acae12a77a"},
-    {file = "gwdatafind-1.1.3.tar.gz", hash = "sha256:37bd2375771587d2bb72b9df8f1b0e6fb7d90205ea903cc92a654b28561b34f3"},
-]
-
-[package.dependencies]
-igwn-auth-utils = ">=0.3.1"
-ligo-segments = "*"
-
-[package.extras]
-docs = ["numpydoc", "sphinx (>=4.4.0)", "sphinx-argparse", "sphinx-automodapi", "sphinx-rtd-theme"]
-lint = ["flake8", "flake8-bandit", "flake8-docstrings", "radon"]
-test = ["pytest (>=2.8.0)", "pytest-cov", "requests-mock"]
-
-[[package]]
-name = "gwosc"
-version = "0.6.1"
-description = "A python interface to the GW Open Science data archive"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-files = [
-    {file = "gwosc-0.6.1-py3-none-any.whl", hash = "sha256:387d47ec5b2b6ab74106a463e67e4270e58c6324dc5c75e1440a8768ee1e6f42"},
-    {file = "gwosc-0.6.1.tar.gz", hash = "sha256:cfe0d65aa92827e3d50652c9abcccc846449a42512b1a2a19007b30f98bf1e26"},
-]
-
-[package.dependencies]
-requests = ">=1.0.0"
-
-[package.extras]
-docs = ["sphinx", "sphinx-automodapi", "sphinx-rtd-theme"]
-test = ["pytest (>=2.7.0)", "pytest-cov", "pytest-socket", "requests-mock (>=1.5.0)"]
-
-[[package]]
-name = "gwpy"
-version = "3.0.2"
-description = "A python package for gravitational-wave astrophysics"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "gwpy-3.0.2-py3-none-any.whl", hash = "sha256:7e0d059f600e81f609ea7d1e31895c3b130edad857a4914c89df9a3b5552bb70"},
-    {file = "gwpy-3.0.2.tar.gz", hash = "sha256:1131bd97fd9ef473bc8c9fffb82907ef186574430779bb6f2970fd5d5fa5f234"},
-]
-
-[package.dependencies]
-astropy = ">=4.3.0"
-dqsegdb2 = "*"
-gwdatafind = ">=1.1.0"
-gwosc = ">=0.5.3"
-h5py = ">=2.8.0"
-ligo-segments = ">=1.0.0"
-ligotimegps = ">=1.2.1"
-matplotlib = ">=3.3.0"
-numpy = ">=1.17"
-python-dateutil = "*"
-requests = "*"
-scipy = ">=1.2.0"
-tqdm = ">=4.10.0"
-
-[package.extras]
-astro = ["inspiral-range"]
-conda = ["python-framel (>=8.40.1)", "python-ldas-tools-framecpp", "python-nds2-client"]
-dev = ["ciecplib", "lalsuite", "lscsoft-glue", "maya", "psycopg2", "pyRXP", "pycbc (>=1.13.4)", "pymysql", "python-ligo-lw (>=1.7.0)", "sqlalchemy", "uproot (>=4.1.5)"]
-docs = ["numpydoc (>=0.8.0)", "sphinx (>=4.0.0)", "sphinx-automodapi", "sphinx-immaterial (>=0.7.3)", "sphinx-panels (>=0.6.0)", "sphinxcontrib-programoutput"]
-test = ["coverage[toml] (>=5.0)", "freezegun (>=0.3.12)", "pytest (>=3.9.1)", "pytest-cov (>=2.4.0)", "pytest-requires", "pytest-socket", "pytest-xdist", "requests-mock"]
 
 [[package]]
 name = "h5py"
@@ -1157,6 +1062,12 @@ optional = false
 python-versions = "*"
 files = [
     {file = "ligo-segments-1.4.0.tar.gz", hash = "sha256:e072a844713c5b02efdcaf5bfe4c3a8cd9ef225b08cfd3202a4e185e0f71f5dc"},
+    {file = "ligo_segments-1.4.0-cp310-cp310-win_amd64.whl", hash = "sha256:f8a0fb3ec6bef7effb80fb2f4f4ffaac02afa77db41a0c42fce5e969201e621b"},
+    {file = "ligo_segments-1.4.0-cp311-cp311-win_amd64.whl", hash = "sha256:da82ae2b839bad0027e0a492b3673344e62360747d41194a265563e6c2903c7d"},
+    {file = "ligo_segments-1.4.0-cp36-cp36m-win_amd64.whl", hash = "sha256:cde0aa9a6cf9d1b66b00d64623a026ed9d37dbc028a9769492c635cfa726fdb9"},
+    {file = "ligo_segments-1.4.0-cp37-cp37m-win_amd64.whl", hash = "sha256:5ce03d6c0d07a14cde9e3a47ecc44bd0efa07a7d58e75a8899be8d35a437b254"},
+    {file = "ligo_segments-1.4.0-cp38-cp38-win_amd64.whl", hash = "sha256:1ec7b6dae3e7dbe2e96dc7dba39a843aab9a4df202ad6b80ce708d7439b7480e"},
+    {file = "ligo_segments-1.4.0-cp39-cp39-win_amd64.whl", hash = "sha256:f66dc8eff12bed2c66fff956150fc6039c16f9a2e63337861cdd3070ced0468d"},
 ]
 
 [package.dependencies]
@@ -1200,18 +1111,6 @@ tqdm = ">=4.27.0"
 [package.extras]
 docs = ["sphinx (>=4.0)", "sphinx-argparse (>=0.3.0)", "sphinx-astropy", "sphinxcontrib-mermaid (>=0.7.1)"]
 test = ["astroquery", "pytest-astropy", "pytest-doctestplus (>=0.12.0)", "pytest-mpl"]
-
-[[package]]
-name = "ligotimegps"
-version = "2.0.1"
-description = "A pure-python version of lal.LIGOTimeGPS"
-category = "main"
-optional = false
-python-versions = ">=3.4"
-files = [
-    {file = "ligotimegps-2.0.1-py2.py3-none-any.whl", hash = "sha256:da8c1289ba1310337ef5177e7936e25ce47d4e8e6a269cbdd5e9abfc5b5db490"},
-    {file = "ligotimegps-2.0.1.tar.gz", hash = "sha256:88626c02ad9a464d1242a1147b40074792f424bafa2ab013eee629c7d1b6469c"},
-]
 
 [[package]]
 name = "lscsoft-glue"
@@ -2543,4 +2442,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8, <4"
-content-hash = "bff6d9709fea917067baef0ba523323aaadee07ec5732a41530b3492e355ae2d"
+content-hash = "423ba30b6be88ec90c1a1dae588ef3bb402cfe60c1e806fa43772fd3ee7d0895"
