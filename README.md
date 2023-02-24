@@ -35,7 +35,7 @@ Paper.
     analysis on the cluster. Install Poetry by running the command in the
     [official Poetry installation instructions]:
 
-        $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+        $ curl -sSL https://install.python-poetry.org | python3 -
 
     Then log out, and log back in.
 
