@@ -86,12 +86,12 @@ farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5
 runs/%/farah/injections.xml: $$(dir $$(@D))psds.xml farah.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
 	--snr-threshold 1 --distribution-samples ../../../farah.h5 --reference-psd ../psds.xml \
-	--nsamples 1000000
+	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
 	--snr-threshold 1 --distribution $(notdir $(@D)) --reference-psd ../psds.xml \
-	--nsamples 1000000
+	--min-triggers 1 --nsamples 1000000
 
 
 #
