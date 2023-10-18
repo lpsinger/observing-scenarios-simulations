@@ -1030,6 +1030,7 @@ files = [
     {file = "ligo-segments-1.4.0.tar.gz", hash = "sha256:e072a844713c5b02efdcaf5bfe4c3a8cd9ef225b08cfd3202a4e185e0f71f5dc"},
     {file = "ligo_segments-1.4.0-cp310-cp310-win_amd64.whl", hash = "sha256:f8a0fb3ec6bef7effb80fb2f4f4ffaac02afa77db41a0c42fce5e969201e621b"},
     {file = "ligo_segments-1.4.0-cp311-cp311-win_amd64.whl", hash = "sha256:da82ae2b839bad0027e0a492b3673344e62360747d41194a265563e6c2903c7d"},
+    {file = "ligo_segments-1.4.0-cp312-cp312-win_amd64.whl", hash = "sha256:601be6d92e52bdebbb5a82b608ed1ceb781a0ea86b3e5333d61af77575b32664"},
     {file = "ligo_segments-1.4.0-cp36-cp36m-win_amd64.whl", hash = "sha256:cde0aa9a6cf9d1b66b00d64623a026ed9d37dbc028a9769492c635cfa726fdb9"},
     {file = "ligo_segments-1.4.0-cp37-cp37m-win_amd64.whl", hash = "sha256:5ce03d6c0d07a14cde9e3a47ecc44bd0efa07a7d58e75a8899be8d35a437b254"},
     {file = "ligo_segments-1.4.0-cp38-cp38-win_amd64.whl", hash = "sha256:1ec7b6dae3e7dbe2e96dc7dba39a843aab9a4df202ad6b80ce708d7439b7480e"},
@@ -2278,13 +2279,13 @@ files = [
 
 [[package]]
 name = "urllib3"
-version = "1.26.17"
+version = "1.26.18"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 files = [
-    {file = "urllib3-1.26.17-py2.py3-none-any.whl", hash = "sha256:94a757d178c9be92ef5539b8840d48dc9cf1b2709c9d6b588232a055c524458b"},
-    {file = "urllib3-1.26.17.tar.gz", hash = "sha256:24d6a242c28d29af46c3fae832c36db3bbebcc533dd1bb549172cd739c82df21"},
+    {file = "urllib3-1.26.18-py2.py3-none-any.whl", hash = "sha256:34b97092d7e0a3a8cf7cd10e386f401b3737364026c45e622aa02903dffe0f07"},
+    {file = "urllib3-1.26.18.tar.gz", hash = "sha256:f8ecc1bba5667413457c529ab955bf8c67b45db799d159066261719e328580a0"},
 ]
 
 [package.extras]
