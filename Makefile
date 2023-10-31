@@ -1,4 +1,4 @@
-RUNS = O3 O4 O5
+RUNS = O4
 POPS = farah
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -28,9 +28,7 @@ O3-psds = \
 	--V1 avirgo_O3actual.txt
 O4-psds = \
 	--H1 aligo_O4low.txt \
-	--L1 aligo_O4low.txt \
-	--V1 O4_Virgo_78.txt \
-	--K1 kagra_3Mpc.txt
+	--L1 aligo_O4low.txt
 O5-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
