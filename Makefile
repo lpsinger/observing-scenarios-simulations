@@ -31,7 +31,7 @@ O4a-psds = \
 	--L1 aligo_O4low.txt
 O4-psds = \
 	--H1 aligo_O4low.txt \
-	--L1 aligo_O4low.txt\
+	--L1 aligo_O4low.txt \
 	--V1 O4_Virgo_78.txt \
 	--K1 kagra_3Mpc.txt
 O5-psds = \
