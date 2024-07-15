@@ -3,6 +3,7 @@ name = "observing-scenarios-simulations"
 version = "0.0.0"
 description = "LIGO/Virgo/KAGRA observing scenarios simulations"
 authors = ["Leo Singer <leo.singer@ligo.org>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 astropy = ">=4.1"
