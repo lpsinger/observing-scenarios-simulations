@@ -8,7 +8,7 @@ package-mode = false
 [tool.poetry.dependencies]
 astropy = ">=4.1"
 astroplan = "*"
-python = ">=3.9, <4"
+python = ">=3.11, <4"
 scipy = "*"
 seaborn = "*"
 "ligo.skymap" = ">=1.0.6"
