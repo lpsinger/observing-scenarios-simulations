@@ -29,13 +29,13 @@ Paper.
 
     *   Log out, and log back in.
 
-2.  Install Poetry.
+2.  Install uv.
 
-    I use [Poetry] to manage the installation of the dependencies for this
-    analysis on the cluster. Install Poetry by running the command in the
-    [official Poetry installation instructions]:
+    I use [uv] to manage the installation of the dependencies for this
+    analysis on the cluster. Install uv by running the command in the
+    [official uv installation instructions]:
 
-        $ curl -sSL https://install.python-poetry.org | python3 -
+        curl -LsSf https://astral.sh/uv/install.sh | sh
 
     Then log out, and log back in.
 
@@ -46,17 +46,10 @@ Paper.
         $ git clone https://github.com/lpsinger/observing-scenarios-simulations
         $ cd observing-scenarios-simulations
 
-4.  Install dependencies with Poetry.
+4.  Finally, install the dependencies and launch a shell inside the uv env:
 
-    Note, due to [Poetry issue #1651], you need to also make sure that pip is
-    up to date _inside_ the poetry environment:
-
-        $ poetry run pip install --upgrade pip
-
-    Finally, install the dependencies and launch a shell inside the poetry env:
-
-        $ poetry install
-        $ poetry shell
+        $ uv sync
+        $ uv run $0
 
 ## To generate source populations
 
@@ -138,6 +131,5 @@ Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
 
 [IGWN Grid]: https://computing.docs.ligo.org/guide/grid/
 [NASA HECC]: https://www.nas.nasa.gov/hecc/
-[Poetry]: https://python-poetry.org
-[Poetry issue #1651]: https://github.com/python-poetry/poetry/issues/1651
-[official Poetry installation instructions]: https://python-poetry.org/docs/#installation
+[uv]: https://docs.astral.sh/uv/
+[official uv installation instructions]: https://docs.astral.sh/uv/getting-started/installation/
