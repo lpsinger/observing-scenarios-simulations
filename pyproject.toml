@@ -1,24 +1,19 @@
-[tool.poetry]
+[project]
 name = "observing-scenarios-simulations"
 version = "0.0.0"
 description = "LIGO/Virgo/KAGRA observing scenarios simulations"
-authors = ["Leo Singer <leo.singer@ligo.org>"]
-package-mode = false
-
-[tool.poetry.dependencies]
-astropy = ">=4.1"
-astroplan = "*"
-python = ">=3.11, <4"
-scipy = "*"
-seaborn = "*"
-"ligo.skymap" = ">=1.0.6"
-"scikits.bootstrap" = "^1.1.0"
-ipykernel = "*"
-ipython = "*"
-ipywidgets = "*"
-gracedb-sdk = "*"
-lxml = "*"
-
-[build-system]
-requires = ["poetry>=1.0.0"]
-build-backend = "poetry.masonry.api"
+authors = [{name = "Leo Singer", email = "leo.singer@ligo.org"}]
+requires-python = ">=3.11, <4"
+dependencies = [
+    "astropy>=4.1",
+    "astroplan",
+    "scipy",
+    "seaborn",
+    "ligo.skymap>=1.0.6",
+    "scikits.bootstrap>=1.1.0",
+    "ipykernel",
+    "ipython",
+    "ipywidgets",
+    "gracedb-sdk",
+    "lxml",
+]
