@@ -7,9 +7,8 @@ from itertools import groupby
 from operator import attrgetter
 from pathlib import Path
 
-from lalinspiral.thinca import InspiralCoincDef
-from ligo.lw.ligolw import LIGO_LW, Document, LIGOLWContentHandler
-from ligo.lw.lsctables import (
+from igwn_ligolw.ligolw import LIGO_LW, Document, Param
+from igwn_ligolw.lsctables import (
     CoincDefTable,
     CoincMapTable,
     CoincTable,
@@ -18,11 +17,8 @@ from ligo.lw.lsctables import (
     SnglInspiralTable,
     TimeSlideTable,
 )
-from ligo.lw.lsctables import New as lsctables_new
-from ligo.lw.lsctables import use_in as lsctables_use_in
-from ligo.lw.param import Param
-from ligo.lw.param import use_in as param_use_in
-from ligo.lw.utils import load_filename, write_filename
+from igwn_ligolw.utils import load_filename, write_filename
+from lalinspiral.thinca import InspiralCoincDef
 from tqdm.auto import tqdm
 
 logging.basicConfig(level=logging.INFO)
@@ -45,12 +41,6 @@ table_classes_to_copy = [
 ]
 
 
-@param_use_in
-@lsctables_use_in
-class ContentHandler(LIGOLWContentHandler):
-    pass
-
-
 # Parse command line arguments
 parser = ArgumentParser()
 parser.add_argument("input")
@@ -58,7 +48,7 @@ parser.add_argument("outdir", type=Path)
 args = parser.parse_args()
 
 log.info('reading "%s"', args.input)
-xmldoc = load_filename(args.input, contenthandler=ContentHandler)
+xmldoc = load_filename(args.input)
 tables = {cls: cls.get_table(xmldoc) for cls in table_classes}
 
 # These tables are to be copied without modification
@@ -98,13 +88,13 @@ for coinc in tqdm(tables[CoincTable]):
     for table in tables_to_copy:
         new_ligolw.appendChild(table)
 
-    new_ligolw.appendChild(new_coinc_table := lsctables_new(CoincTable))
+    new_ligolw.appendChild(new_coinc_table := CoincTable.new())
     new_coinc_table.append(coinc)
 
-    new_ligolw.appendChild(new_coinc_map_table := lsctables_new(CoincMapTable))
+    new_ligolw.appendChild(new_coinc_map_table := CoincMapTable.new())
     new_coinc_map_table.extend(coinc_map_dict[coinc.coinc_event_id])
 
-    new_ligolw.appendChild(new_sngl_table := lsctables_new(SnglInspiralTable))
+    new_ligolw.appendChild(new_sngl_table := SnglInspiralTable.new())
     new_sngl_table.extend(sngl_dict[row.event_id] for row in new_coinc_map_table)
 
     for row in new_coinc_map_table:
