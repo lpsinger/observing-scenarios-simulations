@@ -16,7 +16,8 @@ from ligo.skymap.postprocess.crossmatch import crossmatch
 from ligo.skymap.util import progress_map
 from lxml.etree import parse as parse_xml
 
-client = Client(force_noauth=True)
+include_snr = False
+client = Client(fail_if_noauth=include_snr, force_noauth=not include_snr)
 
 
 def get_params_for_group(voevent_xml, name):
@@ -79,6 +80,12 @@ def get_info(superevent):
             for key, value in get_skymap_stats(skymap).items():
                 result.setdefault(key, value)
 
+        # Save the network SNR.
+        if include_snr:
+            result["snr"] = superevent["preferred_event_data"]["extra_attributes"][
+                "CoincInspiral"
+            ]["snr"]
+
         if all(key in result for key in ["Terrestrial", "area(90)"]):
             return result
     else:
@@ -89,7 +96,7 @@ if __name__ == "__main__":
     # CBC events only
     superevents = (
         s
-        for s in client.superevents.search(query="O3 ~ADVNO")
+        for s in client.superevents.search(query="public O3 ~ADVNO")
         if s["preferred_event_data"]["group"] == "CBC"
     )
 
@@ -109,7 +116,7 @@ if __name__ == "__main__":
     ] = "BBH"
 
     # Put columns in a nicer order
-    table = table[
+    columns = [
         "superevent_id",
         "classification",
         "distance",
@@ -123,6 +130,10 @@ if __name__ == "__main__":
         "MassGap",
         "Terrestrial",
     ]
+    if include_snr:
+        columns.append("snr")
+
+    table = table[columns]
 
     # Put rows in a nicer order
     table.sort("superevent_id")
