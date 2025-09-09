@@ -107,7 +107,7 @@ than running them locally.
     #/bin/sh
     #PBS -V -koed -l select=1:model=cas_ait -l walltime=10:00:00
     unset OMP_NUM_THREADS
-    ...  # <-- put commands here 
+    ...  # <-- put commands here
 
 ## To tabulate BAYESTAR localization statistics
 

@@ -1,18 +1,27 @@
 #!/usr/bin/env python
 """Split events.xml.gz file into many files with one event per file."""
+
+import logging
 from argparse import ArgumentParser
 from itertools import groupby
-import logging
 from operator import attrgetter
 from pathlib import Path
 
 from lalinspiral.thinca import InspiralCoincDef
-from ligo.lw.ligolw import Document, LIGO_LW, LIGOLWContentHandler
+from ligo.lw.ligolw import LIGO_LW, Document, LIGOLWContentHandler
 from ligo.lw.lsctables import (
-    CoincDefTable, CoincMapTable, CoincTable, ProcessParamsTable, ProcessTable,
-    SnglInspiralTable, TimeSlideTable, New as lsctables_new,
-    use_in as lsctables_use_in)
-from ligo.lw.param import Param, use_in as param_use_in
+    CoincDefTable,
+    CoincMapTable,
+    CoincTable,
+    ProcessParamsTable,
+    ProcessTable,
+    SnglInspiralTable,
+    TimeSlideTable,
+)
+from ligo.lw.lsctables import New as lsctables_new
+from ligo.lw.lsctables import use_in as lsctables_use_in
+from ligo.lw.param import Param
+from ligo.lw.param import use_in as param_use_in
 from ligo.lw.utils import load_filename, write_filename
 from tqdm.auto import tqdm
 
@@ -20,10 +29,20 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 table_classes = [
-    CoincDefTable, CoincMapTable, CoincTable, ProcessParamsTable, ProcessTable,
-    SnglInspiralTable, TimeSlideTable]
+    CoincDefTable,
+    CoincMapTable,
+    CoincTable,
+    ProcessParamsTable,
+    ProcessTable,
+    SnglInspiralTable,
+    TimeSlideTable,
+]
 table_classes_to_copy = [
-    CoincDefTable, ProcessParamsTable, ProcessTable, TimeSlideTable]
+    CoincDefTable,
+    ProcessParamsTable,
+    ProcessTable,
+    TimeSlideTable,
+]
 
 
 @param_use_in
@@ -34,8 +53,8 @@ class ContentHandler(LIGOLWContentHandler):
 
 # Parse command line arguments
 parser = ArgumentParser()
-parser.add_argument('input')
-parser.add_argument('outdir', type=Path)
+parser.add_argument("input")
+parser.add_argument("outdir", type=Path)
 args = parser.parse_args()
 
 log.info('reading "%s"', args.input)
@@ -45,25 +64,27 @@ tables = {cls: cls.get_table(xmldoc) for cls in table_classes}
 # These tables are to be copied without modification
 tables_to_copy = [tables[cls] for cls in table_classes_to_copy]
 
-log.info('indexing')
+log.info("indexing")
 
 # Find coinc_def_id for sngl_inspiral<->sngl_inspiral coincs
 coinc_def_id = tables[CoincDefTable].get_coinc_def_id(
-    InspiralCoincDef.search, InspiralCoincDef.search_coinc_type)
+    InspiralCoincDef.search, InspiralCoincDef.search_coinc_type
+)
 
 # Create a dictionary mapping coinc_event_id to lists of coinc_event_map rows
-keyfunc = attrgetter('coinc_event_id')
+keyfunc = attrgetter("coinc_event_id")
 coinc_map_dict = {
-    key: tuple(items) for key, items in
-    groupby(sorted(tables[CoincMapTable], key=keyfunc), key=keyfunc)}
+    key: tuple(items)
+    for key, items in groupby(sorted(tables[CoincMapTable], key=keyfunc), key=keyfunc)
+}
 
 # Create a dictionary mapping event_id to sngl_inspiral rows
 sngl_dict = {row.event_id: row for row in tables[SnglInspiralTable]}
 
 # Create a dictionary mapping event_id to SNR time series
 snr_series_dict = {
-    param.value: param.parentNode
-    for param in Param.getParamsByName(xmldoc, 'event_id')}
+    param.value: param.parentNode for param in Param.getParamsByName(xmldoc, "event_id")
+}
 
 log.info('writing new files to directory "%s"', args.outdir)
 args.outdir.mkdir(exist_ok=True)
@@ -89,5 +110,5 @@ for coinc in tqdm(tables[CoincTable]):
     for row in new_coinc_map_table:
         new_ligolw.appendChild(snr_series_dict[row.event_id])
 
-    new_filename = str(args.outdir / f'{coinc.coinc_event_id}.xml.gz')
+    new_filename = str(args.outdir / f"{coinc.coinc_event_id}.xml.gz")
     write_filename(new_xmldoc, new_filename)

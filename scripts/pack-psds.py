@@ -1,27 +1,36 @@
 #!/usr/bin/env python
 """Pack ASCII injection files into a psd.xml file."""
-from ligo.skymap.tool import ArgumentParser, FileType, register_to_xmldoc
+
+import os
 from argparse import SUPPRESS
+
+import glue.ligolw.utils
 import lal
+import lal.series
+import numpy as np
+from ligo.skymap.tool import ArgumentParser, FileType, register_to_xmldoc
 
 # Command line interface
 detector_names = [d.frDetector.prefix for d in lal.CachedDetectors]
 detector_long_names = [d.frDetector.name for d in lal.CachedDetectors]
 parser = ArgumentParser()
 parser.add_argument(
-    '-o', '--output', metavar='OUT.xml[.gz]', type=FileType('wb'),
-    default='-', help='Name of output file [default: stdout]')
+    "-o",
+    "--output",
+    metavar="OUT.xml[.gz]",
+    type=FileType("wb"),
+    default="-",
+    help="Name of output file [default: stdout]",
+)
 for name, long_name in zip(detector_names, detector_long_names):
     parser.add_argument(
-        '--' + name, metavar='PSD.txt', type=FileType('r'), default=SUPPRESS,
-        help='PSD function for {0} detector'.format(long_name))
+        "--" + name,
+        metavar="PSD.txt",
+        type=FileType("r"),
+        default=SUPPRESS,
+        help="PSD function for {0} detector".format(long_name),
+    )
 args = parser.parse_args()
-
-# Late imports
-import os
-import glue.ligolw.utils
-import lal.series
-import numpy as np
 
 psds = {}
 for name in detector_names:
@@ -38,7 +47,8 @@ for name in detector_names:
 
     fgrid = np.arange(f0, fmax, df)
     series = lal.CreateREAL8FrequencySeries(
-        (psd_file.name).split(".")[0], 0, f0, df, lal.SecondUnit, len(fgrid))
+        (psd_file.name).split(".")[0], 0, f0, df, lal.SecondUnit, len(fgrid)
+    )
     series.data.data = np.exp(np.interp(np.log(fgrid), np.log(f), np.log(psd)))
 
     psds[name] = series
@@ -48,5 +58,5 @@ register_to_xmldoc(xmldoc, parser, args)
 
 with glue.ligolw.utils.SignalsTrap():
     glue.ligolw.utils.write_fileobj(
-        xmldoc, args.output,
-        gz=(os.path.splitext(args.output.name)[-1] == '.gz'))
+        xmldoc, args.output, gz=(os.path.splitext(args.output.name)[-1] == ".gz")
+    )
