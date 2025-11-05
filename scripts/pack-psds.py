@@ -37,13 +37,6 @@ for name, long_name in zip(detector_names, detector_long_names):
         help=f"Column name for {long_name} detector",
     )
 
-parser.add_argument(
-    "--config",
-    metavar="CONFIG",
-    type=str,
-    default=None,
-    help="Configuration name (O5a/O5b/O5c for O5 mode)",
-)
 
 args = parser.parse_args()
 

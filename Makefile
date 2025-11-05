@@ -1,5 +1,5 @@
 RUNS = O3 O4a O4 O5a O5b O5c
-POPS = farah
+POPS = gwtc4
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -82,15 +82,16 @@ runs/%/psds.xml: $$(call psd_files,%)
 # Download samples from the Farah distribution.
 #
 
-O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
-	curl -OL https://dcc.ligo.org/LIGO-T2100512/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5
+
+GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5:
+	curl -OL https://dcc.ligo.org/public/0203/T2500311/004/GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5
 
 
 #
 # Convert the Farah samples to the format needed by bayestar-inject.
 #
 
-farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 scripts/farah.py
+farah.h5: GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5 scripts/farah.py
 	scripts/farah.py $< $@
 
 
