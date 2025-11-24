@@ -2,7 +2,7 @@
 """Pack ASCII injection files into a psd.xml file."""
 
 import os
-from argparse import SUPPRESS,  FileType
+from argparse import SUPPRESS, FileType
 
 import lal
 import lal.series
@@ -30,13 +30,14 @@ for name, long_name in zip(detector_names, detector_long_names):
         default=SUPPRESS,
         help=f"PSD filename for {long_name} detector",
     )
-    parser.add_argument(
-        f"--{name}-column",
-        metavar="COLUMN",
-        default=SUPPRESS,
-        help=f"Column name for {long_name} detector",
-    )
 
+parser.add_argument(
+    "--config",
+    metavar="CONFIG",
+    type=str,
+    default=None,
+    help="Configuration name (O5a/O5b/O5c for O5 mode)",
+)
 
 args = parser.parse_args()
 

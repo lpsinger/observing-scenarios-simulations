@@ -59,7 +59,6 @@ O6-psds = \
 
 #
 # Download official PSD files from the LIGO DCC.
-#
 
 %.txt:
 	curl -OL https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F)
@@ -82,26 +81,25 @@ runs/%/psds.xml: $$(call psd_files,%)
 # Download samples from the Farah distribution.
 #
 
-
 GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5:
 	curl -OL https://dcc.ligo.org/public/0203/T2500311/004/GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5
 
 
 #
-# Convert the Farah samples to the format needed by bayestar-inject.
+# Convert the GWTC-4 samples to the format needed by bayestar-inject.
 #
 
-farah.h5: GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5 scripts/farah.py
-	scripts/farah.py $< $@
+gwtc4.h5: GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5 scripts/gwtc4.py
+	scripts/gwtc4.py $< $@
 
 
 #
 # Generate astrophysical distribution.
 #
 
-runs/%/farah/injections.xml: $$(dir $$(@D))psds.xml farah.h5
+runs/%/gwtc4/injections.xml: $$(dir $$(@D))psds.xml gwtc4.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--snr-threshold 1 --distribution-samples ../../../farah.h5 --reference-psd ../psds.xml \
+	--snr-threshold 1 --distribution-samples ../../../gwtc4.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
