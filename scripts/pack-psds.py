@@ -43,8 +43,6 @@ for name, long_name in zip(detector_names, detector_long_names):
 args = parser.parse_args()
 
 psds = {}
-
-# Process each detector
 for name in detector_names:
     psd_file = getattr(args, name, None)
     if psd_file is None:
