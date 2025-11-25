@@ -28,16 +28,17 @@ for name, long_name in zip(detector_names, detector_long_names):
         metavar="PSD.txt",
         type=FileType("r"),
         default=SUPPRESS,
-        help=f"PSD filename for {long_name} detector",
+        help="PSD function for {0} detector".format(long_name),
     )
-
-parser.add_argument(
-    "--config",
-    metavar="CONFIG",
-    type=str,
-    default=None,
-    help="Configuration name (O5a/O5b/O5c for O5 mode)",
-)
+    parser.add_argument(
+        f"--{name}-column",
+        metavar="N",
+        type=int,
+        default=None,
+        help="Column number to read from {0} PSD file (1, 2, 3, etc.)".format(
+            long_name
+        ),
+    )
 
 args = parser.parse_args()
 
