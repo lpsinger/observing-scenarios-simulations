@@ -82,7 +82,7 @@ runs/%/psds.xml: $$(call psd_files,%)
 #
 
 GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5:
-	curl -OL https://dcc.ligo.org/public/0203/T2500311/004/GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5
+	curl -OL https://dcc.ligo.org/LIGO-T2500311-v4/public/GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5
 
 
 #
