@@ -32,10 +32,10 @@ for name, long_name in zip(detector_names, detector_long_names):
     )
     parser.add_argument(
         f"--{name}-column",
-        metavar="N",
-        type=int,
+        metavar="COLUMN_NAME",
+        type=str,
         default=None,
-        help="Column number to read from {0} PSD file (1, 2, 3, etc.)".format(
+        help="Column name to read from {0} PSD file (e.g., O5aStrain)".format(
             long_name
         ),
     )
