@@ -1,5 +1,5 @@
-RUNS = O3 O4a O4 O5
-POPS = farah
+RUNS = O5a O5b O5c
+POPS = gwtc4
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -34,11 +34,15 @@ O4-psds = \
 	--L1 aligo_O4low.txt \
 	--V1 O4_Virgo_78.txt \
 	--K1 kagra_3Mpc.txt
-O5-psds = \
-	--H1 AplusDesign.txt \
-	--L1 AplusDesign.txt \
-	--V1 avirgo_O5low_NEW.txt \
-	--K1 kagra_128Mpc.txt
+O5a-psds = \
+	--H1 O5StrainCurves_freqabc.txt --H1-column O5aStrain \
+	--L1 O5StrainCurves_freqabc.txt --L1-column O5aStrain
+O5b-psds = \
+	--H1 O5StrainCurves_freqabc.txt --H1-column O5bStrain \
+	--L1 O5StrainCurves_freqabc.txt --L1-column O5bStrain
+O5c-psds = \
+	--H1 O5StrainCurves_freqabc.txt --H1-column O5cStrain \
+	--L1 O5StrainCurves_freqabc.txt --L1-column O5cStrain
 O6-psds = \
 	--H1 AplusDesign.txt \
 	--L1 AplusDesign.txt \
@@ -49,10 +53,9 @@ O6-psds = \
 
 #
 # Download official PSD files from the LIGO DCC.
-#
 
 %.txt:
-	curl -L https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F) > $@
+	curl -L https://dcc.ligo.org/LIGO-T2500310-v2/public/$(@F) > $@
 
 
 #
@@ -60,35 +63,33 @@ O6-psds = \
 #
 
 .SECONDEXPANSION:
-psd_files = $(sort $(filter-out --%,$(value $(1)-psds)))
+psd_files = $(sort $(filter %.txt,$(value $(1)-psds)))
 runs/%/psds.xml: $$(call psd_files,%)
 	mkdir -p $(@D) && scripts/pack-psds.py -o $@ $(value $*-psds)
 
-
 #
-# Download samples from the Farah distribution.
-# FIXME: this document must be public!
+# Download samples from the GWTC-4 distribution.
 #
 
-O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
-	curl -OL https://dcc.ligo.org/LIGO-T2100512/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5
+GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5:
+	curl -OL https://dcc.ligo.org/LIGO-T2500311-v4/public/GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5
 
 
 #
-# Convert the Farah samples to the format needed by bayestar-inject.
+# Convert the GWTC-4 samples to the format needed by bayestar-inject.
 #
 
-farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 scripts/farah.py
-	scripts/farah.py $< $@
+gwtc4.h5: GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5 scripts/gwtc4.py
+	scripts/gwtc4.py $< $@
 
 
 #
 # Generate astrophysical distribution.
 #
 
-runs/%/farah/injections.xml: $$(dir $$(@D))psds.xml farah.h5
+runs/%/gwtc4/injections.xml: $$(dir $$(@D))psds.xml gwtc4.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--snr-threshold 1 --distribution-samples ../../../farah.h5 --reference-psd ../psds.xml \
+	--snr-threshold 1 --distribution-samples ../../../gwtc4.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
