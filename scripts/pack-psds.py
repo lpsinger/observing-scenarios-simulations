@@ -4,10 +4,10 @@
 import os
 from argparse import SUPPRESS
 
-import glue.ligolw.utils
 import lal
 import lal.series
 import numpy as np
+from igwn_ligolw.utils import SignalsTrap, write_fileobj
 from ligo.skymap.tool import ArgumentParser, FileType, register_to_xmldoc
 
 # Command line interface
@@ -56,7 +56,7 @@ for name in detector_names:
 xmldoc = lal.series.make_psd_xmldoc(psds)
 register_to_xmldoc(xmldoc, parser, args)
 
-with glue.ligolw.utils.SignalsTrap():
-    glue.ligolw.utils.write_fileobj(
+with SignalsTrap():
+    write_fileobj(
         xmldoc, args.output, gz=(os.path.splitext(args.output.name)[-1] == ".gz")
     )
