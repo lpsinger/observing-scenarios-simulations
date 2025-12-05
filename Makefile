@@ -52,7 +52,7 @@ O6-psds = \
 #
 
 %.txt:
-	curl -L https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F) > $@
+	curl -OL https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F)
 
 
 #
