@@ -30,6 +30,12 @@ for name, long_name in zip(detector_names, detector_long_names):
         default=SUPPRESS,
         help=f"PSD filename for {long_name} detector",
     )
+    parser.add_argument(
+        f"--{name}-column",
+        metavar="COLUMN",
+        default=SUPPRESS,
+        help=f"Column name for {long_name} detector",
+    )
 args = parser.parse_args()
 
 psds = {}
@@ -38,7 +44,13 @@ for name in detector_names:
     if psd_file is None:
         continue
 
-    f, asd = np.loadtxt(psd_file).T
+    column = getattr(args, f"{name}_column", None)
+    if column is None:
+        f, asd = np.loadtxt(psd_file).T
+    else:
+        data = np.genfromtxt(psd_file, names=True)
+        f = data[data.dtype.names[0]]
+        asd = data[column]
     psd = np.square(asd)
 
     f0 = 10.0
