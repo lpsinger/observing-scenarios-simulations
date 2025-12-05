@@ -80,7 +80,6 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 #
 # Download samples from the Farah distribution.
-# FIXME: this document must be public!
 #
 
 O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
