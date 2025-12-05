@@ -2,13 +2,13 @@
 """Pack ASCII injection files into a psd.xml file."""
 
 import os
-from argparse import SUPPRESS
+from argparse import SUPPRESS, FileType
 
 import lal
 import lal.series
 import numpy as np
 from igwn_ligolw.utils import SignalsTrap, write_fileobj
-from ligo.skymap.tool import ArgumentParser, FileType, register_to_xmldoc
+from ligo.skymap.tool import ArgumentParser, register_to_xmldoc
 
 # Command line interface
 detector_names = [d.frDetector.prefix for d in lal.CachedDetectors]
@@ -58,5 +58,7 @@ register_to_xmldoc(xmldoc, parser, args)
 
 with SignalsTrap():
     write_fileobj(
-        xmldoc, args.output, gz=(os.path.splitext(args.output.name)[-1] == ".gz")
+        xmldoc,
+        args.output,
+        compress="gz" if os.path.splitext(args.output.name)[-1] == ".gz" else False,
     )
