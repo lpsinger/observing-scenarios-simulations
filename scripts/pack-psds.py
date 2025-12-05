@@ -24,7 +24,7 @@ parser.add_argument(
 )
 for name, long_name in zip(detector_names, detector_long_names):
     parser.add_argument(
-        "--" + name,
+        f"--{name}",
         metavar="PSD.txt",
         type=FileType("r"),
         default=SUPPRESS,
