@@ -28,7 +28,7 @@ for name, long_name in zip(detector_names, detector_long_names):
         metavar="PSD.txt",
         type=FileType("r"),
         default=SUPPRESS,
-        help="PSD function for {0} detector".format(long_name),
+        help=f"PSD function for {long_name} detector",
     )
 args = parser.parse_args()
 
