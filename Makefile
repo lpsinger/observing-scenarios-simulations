@@ -78,7 +78,7 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 
 #
-# Download samples from the Farah distribution.
+# Download samples from the GWTC-4 distribution.
 #
 
 GWTC4_BrokenPowerLawTwoPeaks_baseline5_population.hdf5:
