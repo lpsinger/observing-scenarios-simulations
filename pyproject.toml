@@ -5,15 +5,15 @@ description = "LIGO/Virgo/KAGRA observing scenarios simulations"
 authors = [{name = "Leo Singer", email = "leo.singer@ligo.org"}]
 requires-python = ">=3.11, <4"
 dependencies = [
-    "astropy>=4.1",
     "astroplan",
-    "scipy",
-    "seaborn",
-    "ligo.skymap>=1.0.6",
-    "scikits.bootstrap>=1.1.0",
+    "astropy>=4.1",
+    "gracedb-sdk",
     "ipykernel",
     "ipython",
     "ipywidgets",
-    "gracedb-sdk",
+    "ligo.skymap>=1.0.6",
     "lxml",
+    "scikits.bootstrap>=1.1.0",
+    "scipy",
+    "seaborn",
 ]
