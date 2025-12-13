@@ -1429,7 +1429,6 @@ name = "observing-scenarios-simulations"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "astroplan" },
     { name = "astropy" },
     { name = "gracedb-sdk" },
     { name = "ipykernel" },
@@ -1444,7 +1443,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "astroplan" },
     { name = "astropy", specifier = ">=4.1" },
     { name = "gracedb-sdk" },
     { name = "ipykernel" },
