@@ -1,5 +1,5 @@
 RUNS = O3 O4a O4 O5a O5b O5c
-POPS = farah
+POPS = fullpop4
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -79,28 +79,31 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 
 #
-# Download samples from the Farah distribution.
+# Download population parameters from the GWTC-4 Rates & Populations paper
+# and draw intrinsic samples suitable for bayestar-inject.
 #
 
-O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5:
-	curl -OL https://dcc.ligo.org/LIGO-T2100512/public/O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5
+analyses_AllCBC.tar:
+	curl -OL https://zenodo.org/records/16911563/files/$(@F)
 
+AllCBC_FullPop.h5: analyses_AllCBC.tar
+	tar -xf $< $@
 
 #
 # Convert the Farah samples to the format needed by bayestar-inject.
 #
 
-farah.h5: O1O2O3all_mass_h_iid_mag_iid_tilt_powerlaw_redshift_maxP_events_all.h5 scripts/farah.py
-	scripts/farah.py $< $@
+fullpop4.h5: scripts/fullpop4.py AllCBC_FullPop.h5
+	$^ $@
 
 
 #
 # Generate astrophysical distribution.
 #
 
-runs/%/farah/injections.xml: $$(dir $$(@D))psds.xml farah.h5
+runs/%/fullpop4/injections.xml: $$(dir $$(@D))psds.xml fullpop4.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--snr-threshold 1 --distribution-samples ../../../farah.h5 --reference-psd ../psds.xml \
+	--snr-threshold 1 --distribution-samples ../../../fullpop4.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
