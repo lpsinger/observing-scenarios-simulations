@@ -1,4 +1,4 @@
-RUNS = O3 O4a O4 O5a O5b O5c
+RUNS = O4 O5a O5b O5c
 POPS = fullpop4
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -11,7 +11,7 @@ injections: $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FIL
 .PHONY: all psds injections
 
 #
-# Tabulate O3 public alerts.
+# Tabulate public alerts.
 #
 
 public-alerts.dat:
@@ -22,13 +22,6 @@ public-alerts.dat:
 # PSD files to use.
 #
 
-O3-psds = \
-	--H1 aligo_O3actual_H1.txt \
-	--L1 aligo_O3actual_L1.txt \
-	--V1 avirgo_O3actual.txt
-O4a-psds = \
-	--H1 aligo_O4low.txt \
-	--L1 aligo_O4low.txt
 O4-psds = \
 	--H1 aligo_O4low.txt \
 	--L1 aligo_O4low.txt \
