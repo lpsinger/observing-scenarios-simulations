@@ -1,4 +1,4 @@
-RUNS = O4 O5a O5b O5c O6
+RUNS = O4 O5a O5b O5c
 POPS = fullpop4
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -23,45 +23,48 @@ public-alerts.dat:
 #
 
 O4-psds = \
-	--H1 aligo_O4low.txt \
-	--L1 aligo_O4low.txt \
-	--V1 O4_Virgo_78.txt \
-	--K1 kagra_3Mpc.txt
+	--H1 o4b_h1_ref.txt \
+	--L1 o4b_l1_ref.txt \
+	--V1 o4b_v1_ref.txt
 O5a-psds = \
 	--H1 O5StrainCurves_freqabc.txt --H1-column O5aStrain \
 	--L1 O5StrainCurves_freqabc.txt --L1-column O5aStrain \
-	--V1 25115_O5Tier1LowSensASD.txt \
-	--K1 kagra_128Mpc.txt
+	--V1 25115_O5Tier1LowSensASD.txt
 O5b-psds = \
 	--H1 O5StrainCurves_freqabc.txt --H1-column O5bStrain \
 	--L1 O5StrainCurves_freqabc.txt --L1-column O5bStrain \
-	--V1 25115_O5Tier1LowSensASD.txt \
-	--K1 kagra_128Mpc.txt
+	--V1 25115_O5Tier1LowSensASD.txt
 O5c-psds = \
 	--H1 O5StrainCurves_freqabc.txt --H1-column O5cStrain \
 	--L1 O5StrainCurves_freqabc.txt --L1-column O5cStrain \
-	--V1 25115_O5Tier1LowSensASD.txt \
-	--K1 kagra_128Mpc.txt
-O6-psds = \
-	--H1 AplusDesign.txt \
-	--L1 AplusDesign.txt \
-	--I1 AplusDesign.txt \
-	--V1 avirgo_O5high_NEW.txt \
-	--K1 kagra_128Mpc.txt
+	--V1 25115_O5Tier1HighSensASD.txt
 
 
 #
 # Download official PSD files from the LIGO DCC and Virgo TDS.
 #
 
-%.txt:
-	curl -OL https://dcc.ligo.org/LIGO-T2200043-v3/public/$(@F)
+# FIXME: not yet public
+o4b_h1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2500363-v1/public/$(@F)
+
+# FIXME: not yet public
+o4b_l1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2500363-v1/public/$(@F)
+
+# FIXME: not yet public
+o4b_v1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2500388-v1/public/$(@F)
 
 O5StrainCurves_freqabc.txt:
 	curl -OL https://dcc.ligo.org/LIGO-T2500310-v2/public/$(@F)
 
 25115_O5Tier1LowSensASD.txt:
 	curl -o $@ -L https://tds.virgo-gw.eu/?call_file=$(@F)
+
+25115_O5Tier1HighSensASD.txt:
+	curl -o $@ -L https://tds.virgo-gw.eu/?call_file=$(@F)
+
 
 #
 # Pack PSDs into XML files for input to BAYESTAR.
