@@ -27,8 +27,8 @@ df = pd.DataFrame(
 hyper = df.iloc[(df.log_likelihood + df.log_prior).idxmax()]
 
 # FIXME: These parameters are not included in the public release.
-m_min = 0.5
-m_max = 350
+m_min = 1
+m_max = 100
 
 
 def lopass(m, m_crit, eta):
