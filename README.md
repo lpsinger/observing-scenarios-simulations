@@ -8,24 +8,17 @@ Paper.
 
 1.  Set up your cluster environment.
 
-    **[IGWN Grid]**: No special configuration necessary.
+    *   Install [additional LALSuite data](https://lscsoft.docs.ligo.org/ligo.skymap/quickstart/install.html#optional-lalsimulation-data)
+        by running these commands:
 
-    **[NASA HECC]**:
+            $ mkdir -p ~/lalsuite-waveform-data
+            $ cd ~/lalsuite-waveform-data
+            $ curl -OL https://zenodo.org/records/14999310/files/SEOBNRv4ROM_v3.0.hdf5
 
-    *   Install lalsuite-extra by running these commands:
+    *   Add the following line to your shell profile script (`~/.profile`,
+`       `~/.bashrc`, or similar):
 
-            $ cd /nobackup/$USER
-            $ curl -O https://software.igwn.org/lscsoft/source/lalsuite-extra-1.3.0.tar.gz
-            $ tar xf lalsuite-extra-1.3.0.tar.gz
-            $ cd lalsuite-extra-1.3.0
-            $ ./configure --prefix=$HOME/.local
-            $ make install
-
-    *   Add the following to your `~/.profile` script:
-
-            export LAL_DATA_PATH=$HOME/.local/share/lalsimulation
-            module use -a /nasa/modulefiles/testing
-            module load python3-intel/2020.0.014
+            export LAL_DATA_PATH=$HOME/lalsuite-waveform-data
 
     *   Log out, and log back in.
 
