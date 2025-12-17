@@ -11,7 +11,7 @@ dependencies = [
     "ipykernel",
     "ipython",
     "ipywidgets",
-    "ligo.skymap>=2.5.0",
+    "ligo.skymap>=2.5.1",
     "lxml",
     "popsummary",
     "scikits.bootstrap>=1.1.0",
