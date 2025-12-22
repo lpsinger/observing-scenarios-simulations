@@ -14,7 +14,7 @@ injections: $(foreach run,$(RUNS),$(foreach pop,$(POPS),$(foreach filename,$(FIL
 # Tabulate public alerts.
 #
 
-public-alerts.dat:
+public-alerts.dat: scripts/get-public-alerts.py
 	scripts/get-public-alerts.py
 
 
