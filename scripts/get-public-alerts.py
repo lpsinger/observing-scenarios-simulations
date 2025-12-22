@@ -15,9 +15,19 @@ from ligo.skymap.moc import uniq2pixarea
 from ligo.skymap.postprocess.crossmatch import crossmatch
 from ligo.skymap.util import progress_map
 from lxml.etree import parse as parse_xml
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 
 include_snr = False
 client = Client(fail_if_noauth=include_snr, force_noauth=not include_snr)
+client.session.mount(
+    "https://",
+    HTTPAdapter(
+        max_retries=Retry(
+            total=10,
+        )
+    ),
+)
 
 
 def get_params_for_group(voevent_xml, name):
