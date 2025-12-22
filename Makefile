@@ -119,7 +119,7 @@ runs/%/events.xml.gz: runs/%/injections.xml $$(dir $$(@D))psds.xml
 	--seed 1 -j -l error -o $(@F) $(<F) \
 	--reference-psd ../psds.xml \
 	--snr-threshold 1 \
-	--net-snr-threshold $(if $(filter bbh_astro,$(word 2,$(subst /, ,$*))),9,8) \
+	--net-snr-threshold 8 \
 	--min-triggers 1 \
 	--duty-cycle 0.7 --keep-subthreshold --measurement-error gaussian-noise \
 	--detector $(subst --,,$(filter --%1,$(value $(firstword $(subst /, ,$*))-psds)))
