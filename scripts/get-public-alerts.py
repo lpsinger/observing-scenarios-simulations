@@ -30,8 +30,11 @@ def get_skymap(url):
     try:
         new_url = url.replace(".fits.gz", ".multiorder.fits")
         filename = download_file(new_url, cache=True)
-    except urllib.request.HTTPError:
-        filename = download_file(url, cache=True)
+    except urllib.request.HTTPError as e:
+        if e.code == 404:
+            filename = download_file(url, cache=True)
+        else:
+            raise
     return read_sky_map(filename, moc=True)
 
 
