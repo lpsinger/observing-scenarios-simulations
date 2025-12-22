@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     # Add most likely source classification
     classifications = ["BNS", "NSBH", "BBH"]
-    idx = np.argmax(table[classifications].columns.values(), axis=0)
+    idx = np.argmax(table[classifications].as_array().tolist(), axis=1)
     table["classification"] = np.asarray(classifications)[idx]
 
     # Put columns in a nicer order
