@@ -82,9 +82,12 @@ def get_info(superevent):
 
         # Save the network SNR.
         if include_snr:
-            result["snr"] = superevent["preferred_event_data"]["extra_attributes"][
-                "CoincInspiral"
-            ]["snr"]
+            try:
+                result["snr"] = superevent["preferred_event_data"]["extra_attributes"][
+                    "CoincInspiral"
+                ]["snr"]
+            except KeyError:
+                raise RuntimeError(f"No SNR for {superevent_id}")
 
         if all(key in result for key in ["Terrestrial", "area(90)"]):
             return result
@@ -96,24 +99,20 @@ if __name__ == "__main__":
     # CBC events only
     superevents = (
         s
-        for s in client.superevents.search(query="public O3 ~ADVNO")
+        for s in client.superevents.search(
+            query="public O4 ADVOK SIGNIF_LOCKED GCN_PRELIM_SENT"
+        )
         if s["preferred_event_data"]["group"] == "CBC"
+        and s["preferred_event_data"]["pipeline"] != "aframe"
+        and s["preferred_event_data"]["search"] != "SSM"
     )
 
     table = Table(rows=progress_map(get_info, superevents, jobs=None))
 
     # Add most likely source classification
-    classifications = ["BNS", "NSBH", "BBH", "MassGap"]
+    classifications = ["BNS", "NSBH", "BBH"]
     idx = np.argmax(table[classifications].columns.values(), axis=0)
     table["classification"] = np.asarray(classifications)[idx]
-
-    # Reassign MassGap to NSBH if HasNS >= 0.5 else BBH
-    table["classification"][
-        (table["classification"] == "MassGap") & (table["HasNS"] >= 0.5)
-    ] = "NSBH"
-    table["classification"][
-        (table["classification"] == "MassGap") & (table["HasNS"] < 0.5)
-    ] = "BBH"
 
     # Put columns in a nicer order
     columns = [
@@ -127,7 +126,6 @@ if __name__ == "__main__":
         "BNS",
         "NSBH",
         "BBH",
-        "MassGap",
         "Terrestrial",
     ]
     if include_snr:
