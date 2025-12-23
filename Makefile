@@ -88,7 +88,7 @@ AllCBC_FullPop.h5: analyses_AllCBC.tar
 	tar -xf $< $@
 
 #
-# Convert the Farah samples to the format needed by bayestar-inject.
+# Convert the GWTC-4 population parameters to the format needed by bayestar-inject.
 #
 
 fullpop4.h5: scripts/fullpop4.py AllCBC_FullPop.h5
