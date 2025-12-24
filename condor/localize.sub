@@ -1,3 +1,5 @@
+MY.flock_local = True
+MY.DESIRED_Sites = "none"
 accounting_group = ligo.dev.o4.cbc.pe.bayestar
 on_exit_remove = (ExitBySignal == False) && (ExitCode == 0)
 on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
