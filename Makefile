@@ -1,5 +1,5 @@
 RUNS = O4 O5a O5b O5c
-POPS = fullpop4
+POPS = fullpop4 bgp
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -87,11 +87,17 @@ analyses_AllCBC.tar:
 AllCBC_FullPop.h5: analyses_AllCBC.tar
 	tar -xf $< $@
 
+AllCBC_FullPopBGP.h5: analyses_AllCBC.tar
+	tar -xf $< $@
+
 #
 # Convert the GWTC-4 population parameters to the format needed by bayestar-inject.
 #
 
 fullpop4.h5: scripts/fullpop4.py AllCBC_FullPop.h5
+	$^ $@
+
+bgp.h5: scripts/bgp.py AllCBC_FullPopBGP.h5
 	$^ $@
 
 
@@ -102,6 +108,11 @@ fullpop4.h5: scripts/fullpop4.py AllCBC_FullPop.h5
 runs/%/fullpop4/injections.xml: $$(dir $$(@D))psds.xml fullpop4.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
 	--snr-threshold 1 --distribution-samples ../../../fullpop4.h5 --reference-psd ../psds.xml \
+	--min-triggers 1 --nsamples 1000000
+
+runs/%/bgp/injections.xml: $$(dir $$(@D))psds.xml bgp.h5
+	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
+	--snr-threshold 1 --distribution-samples ../../../bgp.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
