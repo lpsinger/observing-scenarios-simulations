@@ -10,3 +10,8 @@ __pycache__
 
 # Generated data
 runs
+/*.txt
+*.tar
+*.h5
+*.zip
+*.pdf
