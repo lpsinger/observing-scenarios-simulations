@@ -24,7 +24,7 @@ np.testing.assert_array_equal(m1, m2)
 log_m = np.log(m1)
 
 # Fill out entire grid to make it easier to sample correctly near the diagonal.
-np.where(rates == 0, rates.T, rates)
+rates = np.where(rates == 0, rates.T, rates)
 
 # Sample masses
 p = rates[:-1, :-1]
