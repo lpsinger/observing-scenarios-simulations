@@ -1,5 +1,5 @@
 RUNS = O4 O5a O5b O5c
-POPS = fullpop4 bgp
+POPS = bgp
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
