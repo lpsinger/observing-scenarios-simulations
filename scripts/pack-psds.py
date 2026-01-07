@@ -65,7 +65,7 @@ for name in detector_names:
 
     psds[name] = series
 
-xmldoc = lal.series.make_psd_xmldoc(psds)
+xmldoc = lal.series.make_psd_xmldoc(psds, encoding="base64")
 register_to_xmldoc(xmldoc, parser, args)
 
 with SignalsTrap():
