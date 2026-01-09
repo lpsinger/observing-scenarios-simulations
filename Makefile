@@ -1,4 +1,4 @@
-RUNS = O4 O5a O5b O5c
+RUNS = O4HL O4HLV O5a O5b O5c
 POPS = bgp
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -22,7 +22,10 @@ public-alerts.dat: scripts/get-public-alerts.py
 # PSD files to use.
 #
 
-O4-psds = \
+O4HL-psds = \
+	--H1 o4b_h1_ref.txt \
+	--L1 o4b_l1_ref.txt
+O4HLV-psds = \
 	--H1 o4b_h1_ref.txt \
 	--L1 o4b_l1_ref.txt \
 	--V1 o4b_v1_ref.txt
