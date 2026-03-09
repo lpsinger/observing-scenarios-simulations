@@ -72,11 +72,14 @@ def mass_dist_1d(m):
         ),
         (
             lambda m: m**hyper.alpha_1,
-            lambda m: m**hyper.alpha_dip
-            * hyper.NSmax ** (hyper.alpha_1 - hyper.alpha_dip),
-            lambda m: m**hyper.alpha_2
-            * hyper.NSmax ** (hyper.alpha_1 - hyper.alpha_dip)
-            * hyper.BHmin ** (hyper.alpha_dip - hyper.alpha_2),
+            lambda m: (
+                m**hyper.alpha_dip * hyper.NSmax ** (hyper.alpha_1 - hyper.alpha_dip)
+            ),
+            lambda m: (
+                m**hyper.alpha_2
+                * hyper.NSmax ** (hyper.alpha_1 - hyper.alpha_dip)
+                * hyper.BHmin ** (hyper.alpha_dip - hyper.alpha_2)
+            ),
         ),
     )
     return (
