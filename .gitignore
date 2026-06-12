@@ -10,6 +10,8 @@ __pycache__
 
 # Generated data
 runs
+popsummary_files
+popsummary_files.tar.gz
 /*.txt
 *.tar
 *.h5

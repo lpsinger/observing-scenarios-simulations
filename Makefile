@@ -1,5 +1,5 @@
 RUNS = O4HL O4HLV O5a O5b O5c
-POPS = bgp
+POPS = fullpop pixelpop
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
 all: psds injections public-alerts.dat
@@ -80,42 +80,41 @@ runs/%/psds.xml: $$(call psd_files,%)
 
 
 #
-# Download population parameters from the GWTC-4 Rates & Populations paper
+# Download population parameters from the Rates & Populations paper
 # and draw intrinsic samples suitable for bayestar-inject.
 #
 
-analyses_AllCBC.tar:
-	curl -OL https://zenodo.org/records/16911563/files/$(@F)
+popsummary_files.tar.gz:
+	curl -OL https://zenodo.org/records/20292639/files/$(@F)
 
-AllCBC_FullPop.h5: analyses_AllCBC.tar
+popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_redshift_powerlaw_mag_iid_spin_magnitude_gaussian_tilt_iid_spin_orientation_popsummary.h5: popsummary_files.tar.gz
 	tar -xf $< $@
 
-AllCBC_FullPopBGP.h5: analyses_AllCBC.tar
+popsummary_files/may26_datarelease/all_cbc_varcut1/all_cbc_varcut1_popsummary.h5: popsummary_files.tar.gz
 	tar -xf $< $@
 
 #
-# Convert the GWTC-4 population parameters to the format needed by bayestar-inject.
+# Convert the population parameters to the format needed by bayestar-inject.
 #
 
-fullpop4.h5: scripts/fullpop4.py AllCBC_FullPop.h5
-	$^ $@
+fullpop.h5: scripts/population.py popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_redshift_powerlaw_mag_iid_spin_magnitude_gaussian_tilt_iid_spin_orientation_popsummary.h5
+	$^ $@ --mode=fullpop
 
-bgp.h5: scripts/bgp.py AllCBC_FullPopBGP.h5
-	$^ $@
-
+pixelpop.h5: scripts/population.py popsummary_files/may26_datarelease/all_cbc_varcut1/all_cbc_varcut1_popsummary.h5
+	$^ $@ --mode=pixelpop
 
 #
 # Generate astrophysical distribution.
 #
 
-runs/%/fullpop4/injections.xml: $$(dir $$(@D))psds.xml fullpop4.h5
+runs/%/fullpop/injections.xml: $$(dir $$(@D))psds.xml fullpop.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--snr-threshold 1 --distribution-samples ../../../fullpop4.h5 --reference-psd ../psds.xml \
+	--snr-threshold 1 --distribution-samples ../../../fullpop.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
-runs/%/bgp/injections.xml: $$(dir $$(@D))psds.xml bgp.h5
+runs/%/pixelpop/injections.xml: $$(dir $$(@D))psds.xml pixelpop.h5
 	mkdir -p $(@D) && cd $(@D) && bayestar-inject -l error --seed 1 -o $(@F) -j \
-	--snr-threshold 1 --distribution-samples ../../../bgp.h5 --reference-psd ../psds.xml \
+	--snr-threshold 1 --distribution-samples ../../../pixelpop.h5 --reference-psd ../psds.xml \
 	--min-triggers 1 --nsamples 1000000
 
 runs/%/injections.xml: $$(dir $$(@D))psds.xml
