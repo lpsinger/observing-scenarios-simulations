@@ -1238,7 +1238,7 @@ wheels = [
 
 [[package]]
 name = "ligo-skymap"
-version = "2.5.3"
+version = "2.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "astroplan" },
@@ -1260,12 +1260,12 @@ dependencies = [
     { name = "shapely" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e3/02/8ff1c9bf94016e78062d1e29788d00cb065aff0c14021591d82d2ef8b248/ligo_skymap-2.5.3.tar.gz", hash = "sha256:04177074d1a83db282c94e01da6a0c06f1341d8d472a9f88081dfb187cdf1a22", size = 2342785, upload-time = "2026-01-07T18:26:35.403Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/58/1e/c7061ffd5ba05e5beac43f868649aef3f9759a3da53e789294e9b45b133a/ligo_skymap-2.5.4.tar.gz", hash = "sha256:042f05de47cd8b8562bbeb5f2e9b939831dc19eb226c439f8577f14966c4ac36", size = 2342821, upload-time = "2026-06-06T14:52:33.535Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8c/f9/8471a4330968fd088a66188e5fc728358e13dc80d91c6e79523c47a2107d/ligo_skymap-2.5.3-cp311-abi3-macosx_12_0_arm64.whl", hash = "sha256:3ec707f80f98e03ca8c3623cedae633188624532d7f7253ecf9f20bd378867d1", size = 9512882, upload-time = "2026-01-07T18:26:24.045Z" },
-    { url = "https://files.pythonhosted.org/packages/c0/c3/ad83910793032bf14858a04b9699ae45e38812c7f118b109efe134527e90/ligo_skymap-2.5.3-cp311-abi3-macosx_13_0_x86_64.whl", hash = "sha256:d627b7a020b02775f69ac475c43d1800cd97a10ec53763671c4964728d0201aa", size = 8753714, upload-time = "2026-01-07T18:26:27.319Z" },
-    { url = "https://files.pythonhosted.org/packages/aa/d4/28471128b68dae740c1a9c76abd126fff66347517a6c4bdd138132fb985c/ligo_skymap-2.5.3-cp311-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:6907d5451b0a9ed04714d01132eb544034f93c50acf123c7d526da1be83989f9", size = 8845344, upload-time = "2026-01-07T18:26:29.905Z" },
-    { url = "https://files.pythonhosted.org/packages/21/f2/d798d554cc0d74839e3ecf33a6d5719b3951e1b5724e3d116eeed0b28a46/ligo_skymap-2.5.3-cp311-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:30e3d1069e919d4273a150d5661047c409aa8baa9223f9827713d185b7717401", size = 21735145, upload-time = "2026-01-07T18:26:32.541Z" },
+    { url = "https://files.pythonhosted.org/packages/92/77/7f4ba048fe943fbaea7dbc833190eb0d7f66acc5bdb86c0779ebb66c50c1/ligo_skymap-2.5.4-cp311-abi3-macosx_12_0_arm64.whl", hash = "sha256:db0013026bf115f3989fba711c80dea03f2eb18fe45da276429b0d7f8b1a2eb9", size = 9617369, upload-time = "2026-06-06T14:52:23.395Z" },
+    { url = "https://files.pythonhosted.org/packages/de/ed/e4be632948c55d2171b19246cb1757e2701ff57eecc440a457b735c8f6f5/ligo_skymap-2.5.4-cp311-abi3-macosx_13_0_x86_64.whl", hash = "sha256:f0b57711a001a8abbd8ecaa88d27efaf603f9bf72e9f1dfcafa2f3005c3c0946", size = 8837727, upload-time = "2026-06-06T14:52:25.926Z" },
+    { url = "https://files.pythonhosted.org/packages/c1/3d/3a230bba3f8f15ef9b0fed22e38242184d25abfece0e07456b99e94dffde/ligo_skymap-2.5.4-cp311-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:64c905cfe5c4045cedeb2c60c6f242c01b58d6e31acb2931131f8cd424fcb8cd", size = 8845365, upload-time = "2026-06-06T14:52:28.542Z" },
+    { url = "https://files.pythonhosted.org/packages/85/29/3212104fa195e38d2cdac0328cad02758d88cedaa969aa7558bf2b05ef3c/ligo_skymap-2.5.4-cp311-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3368c0f2aa1e0176539dc39e2a811776fcf1fef4870e57740ea1e21c4a726b3e", size = 21737917, upload-time = "2026-06-06T14:52:31.341Z" },
 ]
 
 [[package]]
