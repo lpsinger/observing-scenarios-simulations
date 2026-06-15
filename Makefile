@@ -93,6 +93,8 @@ popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_reds
 popsummary_files/may26_datarelease/all_cbc_varcut1/all_cbc_varcut1_popsummary.h5: popsummary_files.tar.gz
 	tar -xf $< $@
 
+.INTERMEDIATE: popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_redshift_powerlaw_mag_iid_spin_magnitude_gaussian_tilt_iid_spin_orientation_popsummary.h5 popsummary_files/may26_datarelease/all_cbc_varcut1/all_cbc_varcut1_popsummary.h5
+
 #
 # Convert the population parameters to the format needed by bayestar-inject.
 #
