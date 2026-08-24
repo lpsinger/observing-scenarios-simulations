@@ -92,6 +92,6 @@ x2 = np.random.uniform(0, np.where(m2 <= ns_max_mass, 0.4, 1))
 cos1 = np.random.uniform(-1, 1, n)
 cos2 = np.random.uniform(-1, 1, n)
 
-Table({"mass1": m1, "mass2": m2, "spin1z": x1 * cos2, "spin2z": x2 * cos2}).write(
+Table({"mass1": m1, "mass2": m2, "spin1z": x1 * cos1, "spin2z": x2 * cos2}).write(
     args.output, overwrite=True
 )
