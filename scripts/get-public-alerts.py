@@ -104,8 +104,7 @@ def get_info(superevent):
 
         if all(key in result for key in ["Terrestrial", "area(90)"]):
             return result
-    else:
-        raise RuntimeError(f"Missing some information for {superevent_id}")
+    raise RuntimeError(f"Missing some information for {superevent_id}")
 
 
 if __name__ == "__main__":
