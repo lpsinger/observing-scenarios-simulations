@@ -171,3 +171,18 @@ coincs_dat_columns := coinc_event_id ifos snr
 %/coincs.dat: %/events.xml.gz
 	echo "$(subst $(space),$(tab),$(coincs_dat_columns))" > $@ && \
 	igwn_ligolw_print -t coinc_inspiral $(coincs_dat_columns:%=-c %) -d "$(tab)" $< >> $@
+
+
+#
+# Optional per-event detection weights. Not part of all.
+#
+
+detection-weights: $(foreach run,$(RUNS),$(foreach pop,$(POPS),runs/$(run)/$(pop)/detection-weights.dat))
+
+.PHONY: detection-weights
+
+runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py runs/%/fullpop/injections.dat runs/%/fullpop/coincs.dat thresholds/rho_eq.csv popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_redshift_powerlaw_mag_iid_spin_magnitude_gaussian_tilt_iid_spin_orientation_popsummary.h5
+	$(wordlist 1,4,$^) $@ --popsummary $(word 5,$^)
+
+runs/%/pixelpop/detection-weights.dat: scripts/detection-weights.py runs/%/pixelpop/injections.dat runs/%/pixelpop/coincs.dat thresholds/rho_eq.csv
+	$^ $@

@@ -121,6 +121,24 @@ previous step.
 
 Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
 
+## Optional detection weights
+
+The simulations count a signal as detected above a network SNR of 8 and draw
+sources at a constant comoving merger rate. This target writes, for every
+detected event and without touching the default products, two columns to
+reweight those two choices:
+
+    $ make detection-weights
+
+`runs/*/*/detection-weights.dat` gives `passes_rho_eq`, which is 1 when the
+network SNR reaches `rho_eq`, the threshold that selects as many GWTC-5.0
+sensitivity injections of the event's class and chirp-mass bin as a FAR < 1/yr
+cut (`thresholds/rho_eq.csv`, see `thresholds/README.md`), and, for `fullpop`
+only, `redshift_weight`, which is `(1 + z)**lamb` with `lamb` the posterior
+median of the FullPop redshift slope. Summing `passes_rho_eq` or its product
+with `redshift_weight` over a class gives the detection count under either
+choice.
+
 
 [IGWN Grid]: https://computing.docs.ligo.org/guide/grid/
 [NASA HECC]: https://www.nas.nasa.gov/hecc/
