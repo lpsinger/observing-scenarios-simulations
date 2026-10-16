@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-"""Tabulate two optional per-event weights for one run and population: the
-network SNR threshold that selects as many signals as the FAR < 1/yr cut of the
-GWTC catalogues, and the weight of the FullPop redshift evolution. Nothing in
-the default products reads this file."""
+"""Tabulate optional per-event detection weights for one run and population."""
 
 from argparse import ArgumentParser
 
@@ -23,8 +20,15 @@ parser.add_argument(
     default="O4b",
     help="observing run whose thresholds to apply [default: %(default)s]",
 )
-parser.add_argument(
-    "--popsummary", help="PopSummary file of the FullPop model, for the redshift weight"
+lamb_source = parser.add_mutually_exclusive_group()
+lamb_source.add_argument(
+    "--lamb",
+    type=float,
+    help="exponent of the merger rate evolution (1 + z)**lamb, for the redshift weight",
+)
+lamb_source.add_argument(
+    "--popsummary",
+    help="PopSummary file of the FullPop model, to read lamb from (posterior median)",
 )
 args = parser.parse_args()
 
@@ -54,6 +58,18 @@ source_class = np.where(
     np.where(np.minimum(mass1, mass2) < ns_max_mass, "NSBH", "BBH"),
 )
 
+# The injection release computes its optimal SNRs differently from bayestar, so
+# the thresholds have to be measured on SNRs converted to those of bayestar.
+# The header of the table states which SNRs it was measured on.
+with open(args.thresholds) as f:
+    units = "".join(line for line in f if line.startswith("#"))
+if "# SNRs: optimal SNRs of the simulations" not in units:
+    raise ValueError(
+        f"{args.thresholds} was not measured on the SNRs of bayestar; the table "
+        "on the release SNRs (first line '# SNRs: optimal SNRs of the release') "
+        "does not apply to coincs.dat"
+    )
+
 thresholds = Table.read(args.thresholds, format="ascii.csv", comment="#")
 thresholds = thresholds[thresholds["run"] == args.rho_eq_run]
 rho_eq = np.empty(len(table))
@@ -75,19 +91,22 @@ result = Table(
     {
         "simulation_id": table["simulation_id"],
         "redshift": redshift,
+        "source_class": source_class,
         "rho_eq": rho_eq,
         "passes_rho_eq": (table["snr"] >= rho_eq).astype(int),
     }
 )
 comments = [f"thresholds: {args.thresholds}, run {args.rho_eq_run}"]
 
+lamb = args.lamb
 if args.popsummary is not None:
     popresult = PopulationResult(args.popsummary)
-    if "lamb" not in popresult.get_metadata("hyperparameters"):
+    if "lamb" not in (popresult.get_metadata("hyperparameters") or ()):
         raise ValueError(f"no lamb hyperparameter in {args.popsummary}")
+    lamb = np.median(popresult.get_hyperparameter_samples(hyperparameters="lamb"))
+if lamb is not None:
     # The merger rate of FullPop evolves as (1 + z)**lamb, whereas
     # bayestar-inject draws sources at a constant comoving rate.
-    lamb = np.median(popresult.get_hyperparameter_samples(hyperparameters="lamb"))
     result["redshift_weight"] = (1 + redshift) ** lamb
     comments.append(f"redshift_weight = (1 + redshift)**lamb, lamb = {lamb:.4f}")
 

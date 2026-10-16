@@ -174,15 +174,16 @@ coincs_dat_columns := coinc_event_id ifos snr
 
 
 #
-# Optional per-event detection weights. Not part of all.
+# Optional per-event detection weights, FullPop only. Not part of all.
 #
 
-detection-weights: $(foreach run,$(RUNS),$(foreach pop,$(POPS),runs/$(run)/$(pop)/detection-weights.dat))
+detection-weights: $(foreach run,$(RUNS),runs/$(run)/fullpop/detection-weights.dat)
 
 .PHONY: detection-weights
 
-runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py runs/%/fullpop/injections.dat runs/%/fullpop/coincs.dat thresholds/rho_eq.csv popsummary_files/production_1_mass_NotchFilterBinnedPairingMassDistribution_redshift_powerlaw_mag_iid_spin_magnitude_gaussian_tilt_iid_spin_orientation_popsummary.h5
-	$(wordlist 1,4,$^) $@ --popsummary $(word 5,$^)
+# Posterior median of lamb for GWTC-5.0 FullPop, the exponent of the
+# (1 + z)**lamb merger-rate evolution.
+FULLPOP_LAMB = 2.535605802782432
 
-runs/%/pixelpop/detection-weights.dat: scripts/detection-weights.py runs/%/pixelpop/injections.dat runs/%/pixelpop/coincs.dat thresholds/rho_eq.csv
-	$^ $@
+runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py runs/%/fullpop/injections.dat runs/%/fullpop/coincs.dat thresholds/rho_eq.csv
+	$^ $@ --lamb $(FULLPOP_LAMB)
