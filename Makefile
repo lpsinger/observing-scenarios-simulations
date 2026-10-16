@@ -175,15 +175,17 @@ coincs_dat_columns := coinc_event_id ifos snr
 
 #
 # Optional per-event detection weights, FullPop only. Not part of all.
+# Only the runs already simulated are processed: the target never runs the
+# simulations or downloads anything. Run it after `make injections`.
 #
-
-detection-weights: $(foreach run,$(RUNS),runs/$(run)/fullpop/detection-weights.dat)
-
-.PHONY: detection-weights
 
 # Posterior median of lamb for GWTC-5.0 FullPop, the exponent of the
 # (1 + z)**lamb merger-rate evolution.
 FULLPOP_LAMB = 2.535605802782432
 
-runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py runs/%/fullpop/injections.dat runs/%/fullpop/coincs.dat thresholds/rho_eq.csv
-	$^ $@ --lamb $(FULLPOP_LAMB)
+detection-weights: $(patsubst %/coincs.dat,%/detection-weights.dat,$(wildcard runs/*/fullpop/coincs.dat))
+
+.PHONY: detection-weights
+
+runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py thresholds/rho_eq.csv
+	$< $(@D)/injections.dat $(@D)/coincs.dat thresholds/rho_eq.csv $@ --lamb $(FULLPOP_LAMB)

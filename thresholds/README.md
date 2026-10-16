@@ -34,6 +34,39 @@ with other noise curves (IR1, O5), as long as their SNRs are computed with the
 same templates and cutoff. This assumes that the searches do not change after
 O4.
 
+## Using the thresholds
+
+    $ make detection-weights
+
+writes `runs/<run>/fullpop/detection-weights.dat` for every run already
+simulated, with one row per detected event:
+
+| Column | Content |
+|---|---|
+| `simulation_id` | event identifier, as in `injections.dat` and `coincs.dat` |
+| `redshift` | from the luminosity distance, Planck15 as in `bayestar-inject` |
+| `source_class` | `BNS`, `NSBH` or `BBH`, with the 2.5 Msun boundary of the table |
+| `rho_eq` | threshold of the event's class and detector-frame chirp-mass bin |
+| `passes_rho_eq` | 1 when the network SNR of `coincs.dat` reaches `rho_eq` |
+| `redshift_weight` | `(1 + z)**lamb`, with `lamb` the posterior median of the FullPop redshift slope (`FULLPOP_LAMB` in the Makefile) |
+
+Summing `passes_rho_eq` over a class gives the detection count with the
+measured threshold at the constant merger rate of the simulations; summing its
+product with `redshift_weight` restores the redshift evolution of the FullPop
+rate. Events outside the chirp-mass bins take the threshold of the nearest bin.
+
+The target only reads the `injections.dat` and `coincs.dat` already in `runs/`,
+so run it last, after `make injections`; it never runs the simulations and
+skips the runs not simulated yet. After a run has been simulated again,
+`make -B detection-weights` redoes its weights. The script also runs on its own:
+
+    $ scripts/detection-weights.py runs/O5a/fullpop/injections.dat \
+          runs/O5a/fullpop/coincs.dat thresholds/rho_eq.csv \
+          runs/O5a/fullpop/detection-weights.dat --lamb 2.535605802782432
+
+`--rho-eq-run O4a` applies the O4a rows instead of the O4b ones, and
+`--popsummary FILE` reads `lamb` from a PopSummary file instead of `--lamb`.
+
 ## How the values were measured
 
 Not in this repository. They come from the GWTC-5.0 cumulative sensitivity
