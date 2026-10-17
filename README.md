@@ -121,29 +121,18 @@ previous step.
 
 Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
 
-## Optional detection weights
 
-The simulations count a signal as detected above a network SNR of 8 and draw
-sources at a constant comoving merger rate. This target writes, for every
-detected event and without touching the default products, two columns to
-reweight those two choices:
+## To tabulate detection weights (optional)
+
+After the simulations, this command writes
+`runs/<run>/fullpop/detection-weights.dat` for each FullPop run already
+simulated. Its column `passes_rho_eq` flags the events above the network SNR
+threshold equivalent to FAR < 1/yr, and `redshift_weight` restores the redshift
+evolution of the FullPop merger rate:
 
     $ make detection-weights
 
-`runs/*/*/detection-weights.dat` gives `source_class` and `passes_rho_eq`,
-which is 1 when the network SNR reaches `rho_eq`, the threshold that selects as
-many GWTC-5.0 sensitivity injections of the event's class and detector-frame
-chirp-mass bin as a FAR < 1/yr cut (`thresholds/rho_eq.csv`, see
-`thresholds/README.md`), and, for `fullpop` only, `redshift_weight`, which is
-`(1 + z)**lamb` with `lamb` the posterior median of the FullPop redshift slope.
-Summing `passes_rho_eq` over a class, or its product with `redshift_weight`,
-gives the detection count under either choice.
-
-Every run takes the O4b thresholds, the most recent measured; `--rho-eq-run`
-selects another. The `fullpop` rule reads the FullPop PopSummary file, which
-`make` downloads if it is absent and deletes once it is done with it, so ask for
-this target in the same `make` command as the default products rather than
-afterwards.
+See `thresholds/README.md` for the thresholds and how they were measured.
 
 
 [IGWN Grid]: https://computing.docs.ligo.org/guide/grid/
