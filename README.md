@@ -132,6 +132,13 @@ evolution of the FullPop merger rate:
 
     $ make detection-weights
 
+It then writes `runs/weighted-detections.rst`, the detections of each class
+under those two choices, in the layout of `runs/summary.rst`: over its own
+observing time for a run that has happened, and per year for a run still to
+come. O4a and O4b observed for the length of their segments, from the GWOSC
+detector-status pages; a forecast has no observing time of its own, so IR1 and
+O5 are given per year.
+
 See `thresholds/README.md` for the thresholds and how they were measured.
 
 

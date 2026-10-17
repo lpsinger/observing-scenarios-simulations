@@ -23,10 +23,11 @@ give thresholds 4-17% higher, so its SNRs are converted before the measurement.
 The `run` column selects the injections, with their searches and the detectors
 observing at each injection time.
 
-Within O4a the threshold does not change with the detector sensitivity, so the
-O4b rows, the default of `detection-weights.py`, are applied to every simulated
-run, IR1 and O5 included. This assumes that the searches do not change after
-O4.
+A simulated run takes the thresholds of the observing run it reproduces: the
+O4a rows for the HL network of O4, the O4b rows for HLV. Within O4a the
+threshold does not change with the detector sensitivity, so the O4b rows, the
+default of `detection-weights.py`, also serve IR1 and O5, which assumes that
+the searches do not change after O4.
 
 ## Using the thresholds
 
@@ -37,8 +38,10 @@ simulated. `passes_rho_eq` is 1 when the network SNR of an event reaches the
 threshold of its class and chirp-mass bin, and `redshift_weight` is
 `(1 + z)**lamb`, which restores the redshift evolution of the FullPop rate.
 Summing `passes_rho_eq`, or its product with `redshift_weight`, over a class
-gives the detection count. `make -B detection-weights` redoes the weights after
-a run has been simulated again.
+gives the detection count; `scripts/weighted-detections.py` does that sum and
+turns it into `runs/weighted-detections.rst`, with the same rate prior and
+credible interval as `runs/summary.rst`. `make -B detection-weights` redoes the
+weights after a run has been simulated again.
 
 ## How the values were measured
 
