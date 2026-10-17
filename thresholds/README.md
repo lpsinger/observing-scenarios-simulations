@@ -1,8 +1,8 @@
 # SNR thresholds equivalent to a FAR cut
 
 `rho_eq.csv` holds the network SNR threshold that selects as many signals as the
-FAR < 1/yr cut of the GWTC catalogues, per source class and detector-frame
-chirp-mass bin. `scripts/detection-weights.py` reads it; nothing else does.
+FAR < 1/yr cut of GWTC-5.0, per source class and detector-frame chirp-mass bin.
+`measure.py` writes it and `scripts/detection-weights.py` reads it.
 
 | Column | Content |
 |---|---|
@@ -18,20 +18,14 @@ chirp-mass bin. `scripts/detection-weights.py` reads it; nothing else does.
 
 The thresholds cut the network SNR of `coincs.dat`, as `bayestar-realize-coincs`
 computes it: o2-uberbank templates from 25 Hz, with the `o4b_*_ref.txt` curves.
-Both runs refer to these curves. What the `run` column selects is the injection
-set, with its searches and the detectors observing at each injection time.
+The injection release computes its SNRs with other templates and PSDs, which
+give thresholds 4-17% higher, so its SNRs are converted before the measurement.
+The `run` column selects the injections, with their searches and the detectors
+observing at each injection time.
 
-The injection release computes its optimal SNRs otherwise, with IMRPhenomXPHM
-from 16 Hz and, for each month, the 10% quantile in each frequency bin of the
-PSDs of that month. The same measurement on those SNRs gives thresholds higher
-by 4-12% in O4a and 10-17% in O4b. LIGO-P2600188 tabulates both; only the values
-here apply to a simulated SNR.
-
-Within a run the threshold does not follow the detector sensitivity
-(LIGO-P2600188, Section 4.3). The O4b rows, the default of
-`detection-weights.py --rho-eq-run`, therefore apply unchanged to runs simulated
-with other noise curves (IR1, O5), as long as their SNRs are computed with the
-same templates and cutoff. This assumes that the searches do not change after
+Within O4a the threshold does not change with the detector sensitivity, so the
+O4b rows, the default of `detection-weights.py`, are applied to every simulated
+run, IR1 and O5 included. This assumes that the searches do not change after
 O4.
 
 ## Using the thresholds
@@ -39,71 +33,43 @@ O4.
     $ make detection-weights
 
 writes `runs/<run>/fullpop/detection-weights.dat` for every run already
-simulated, with one row per detected event:
-
-| Column | Content |
-|---|---|
-| `simulation_id` | event identifier, as in `injections.dat` and `coincs.dat` |
-| `redshift` | from the luminosity distance, Planck15 as in `bayestar-inject` |
-| `source_class` | `BNS`, `NSBH` or `BBH`, with the 2.5 Msun boundary of the table |
-| `rho_eq` | threshold of the event's class and detector-frame chirp-mass bin |
-| `passes_rho_eq` | 1 when the network SNR of `coincs.dat` reaches `rho_eq` |
-| `redshift_weight` | `(1 + z)**lamb`, with `lamb` the posterior median of the FullPop redshift slope (`FULLPOP_LAMB` in the Makefile) |
-
-Summing `passes_rho_eq` over a class gives the detection count with the
-measured threshold at the constant merger rate of the simulations; summing its
-product with `redshift_weight` restores the redshift evolution of the FullPop
-rate. Events outside the chirp-mass bins take the threshold of the nearest bin.
-
-The target only reads the `injections.dat` and `coincs.dat` already in `runs/`,
-so run it last, after `make injections`; it never runs the simulations and
-skips the runs not simulated yet. After a run has been simulated again,
-`make -B detection-weights` redoes its weights. The script also runs on its own:
-
-    $ scripts/detection-weights.py runs/O5a/fullpop/injections.dat \
-          runs/O5a/fullpop/coincs.dat thresholds/rho_eq.csv \
-          runs/O5a/fullpop/detection-weights.dat --lamb 2.535605802782432
-
-`--rho-eq-run O4a` applies the O4a rows instead of the O4b ones, and
-`--popsummary FILE` reads `lamb` from a PopSummary file instead of `--lamb`.
+simulated. `passes_rho_eq` is 1 when the network SNR of an event reaches the
+threshold of its class and chirp-mass bin, and `redshift_weight` is
+`(1 + z)**lamb`, which restores the redshift evolution of the FullPop rate.
+Summing `passes_rho_eq`, or its product with `redshift_weight`, over a class
+gives the detection count. `make -B detection-weights` redoes the weights after
+a run has been simulated again.
 
 ## How the values were measured
 
-Not in this repository. They come from the GWTC-5.0 cumulative sensitivity
-estimates, doi:10.5281/zenodo.19500052, which the simulations never read. For
-the injections of one run, class and bin:
+For the injections of one run, class and bin of the GWTC-5.0 cumulative
+sensitivity estimates (doi:10.5281/zenodo.19500052):
 
-1.  take the smallest FAR over the searches of the run, and call an injection
-    found below 1/yr;
-2.  convert the optimal SNR of the injection in each detector observing at its
-    GPS time to the one bayestar computes for the same source, by the ratio of
-    the noise-weighted norms of the two templates, then recover a network SNR
-    as `bayestar-realize-coincs` does, over sixteen noise realizations;
-3.  `rho_eq` is the SNR above which the fraction of recovered values equals the
-    found fraction. Equivalently, as many found injections sit below `rho_eq` as
-    missed injections above it.
+1.  an injection is found when its smallest FAR over the searches is below
+    1/yr;
+2.  its optimal SNR in each detector observing at its GPS time is converted to
+    the one bayestar computes (`snr_scale.py`), and its network SNR is drawn as
+    `bayestar-realize-coincs` does, over sixteen noise realizations;
+3.  `rho_eq` is the SNR above which the fraction of drawn values equals the
+    found fraction, so that as many found injections lie below it as missed
+    injections above it.
 
-Both fractions are taken over the same injections, so no population weights
-enter. Because the found fraction rises gradually with SNR, the threshold
-reproduces the number of FAR-selected signals exactly only for the SNR
-distribution of the injections; for signals falling as SNR^-4 above 8, the FAR
-selection keeps 12% more. LIGO-P2600188 gives the method, the bins, the
-bootstrap error and the checks.
+No population weights enter. Because the found fraction rises gradually with
+SNR, the threshold reproduces the number of FAR-selected signals exactly only
+for the SNR distribution of the injections; for signals falling as SNR^-4 above
+8, the FAR selection keeps 12% more. `config.py` lists every input and choice.
 
-The code is `scripts/snr_far_calibration/` of
-<https://github.com/weizmannk/cbc-population-distributions>, at the commit named
-in the header of `rho_eq.csv`. `snr_scale.py` computes the conversion of step 2
-and `measure.py` the thresholds:
+The measurement is not part of `make`. It only needs to be redone for a new
+injection set. From the root of the repository, download its inputs into
+`thresholds/data/`, which git ignores:
 
-    $ python snr_scale.py --runs O4a O4b -o outputs/snr_scale.csv \
-          --H1 ../../data/asd/o4b_h1_ref.txt \
-          --L1 ../../data/asd/o4b_l1_ref.txt \
-          --V1 ../../data/asd/o4b_v1_ref.txt
-    $ SNRFAR_OUT=outputs/reference python measure.py --runs O4a O4b \
-          --snr-scale outputs/snr_scale.csv
+    $ mkdir -p thresholds/data/psds-o1234ab
+    $ curl -L -o thresholds/data/mixture-semi_o1_o2-real_o3_o4a_o4b-cartesian_spins_20260410130052UTC-clipped.hdf \
+          https://zenodo.org/records/19500052/files/mixture-semi_o1_o2-real_o3_o4a_o4b-cartesian_spins_20260410130052UTC-clipped.hdf
+    $ curl -L https://zenodo.org/records/19500052/files/psds-o1234ab.tar.gz | tar -xz -C thresholds/data/psds-o1234ab
+    $ make o4b_h1_ref.txt o4b_l1_ref.txt o4b_v1_ref.txt
+    $ python thresholds/measure.py
 
-`export_thresholds.py` then writes this file, keeping the provenance lines and
-dropping the two columns that record the closure of the measurement. It refuses
-a table measured on the SNRs of the release. Reproducing the measurement needs
-the 1.1 GB injection file and the GWOSC segments of each run, so the table is
-kept as data here rather than as a `make` target.
+`measure.py` rewrites `rho_eq.csv`; `-o FILE` writes elsewhere. It needs
+`SEOBNRv4ROM_v3.0.hdf5` in `LAL_DATA_PATH` and the `gwosc` package, which
+downloads the observing segments.

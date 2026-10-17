@@ -1,7 +1,6 @@
-# SNRs: optimal SNRs of the simulations (o2-uberbank from 25 Hz) for H1 ../../data/asd/o4b_h1_ref.txt, L1 ../../data/asd/o4b_l1_ref.txt, V1 ../../data/asd/o4b_v1_ref.txt, converted with outputs/snr_scale.csv
-# command: measure.py --runs O4a O4b --snr-scale outputs/snr_scale.csv --all-histograms
+# SNRs: optimal SNRs of the simulations (o2-uberbank from 25 Hz) for H1 o4b_h1_ref.txt, L1 o4b_l1_ref.txt, V1 o4b_v1_ref.txt
+# command: measure.py
 # injections: mixture-semi_o1_o2-real_o3_o4a_o4b-cartesian_spins_20260410130052UTC-clipped.hdf, doi:10.5281/zenodo.19500052
-# commit: weizmannk/cbc-population-distributions@c997922
 run,source_class,chirp_mass_min,chirp_mass_max,n_injections,n_found,rho_eq,error
 O4a,BNS,0.85,1.12,199,137,12.509,0.312
 O4a,BNS,1.12,1.4,610,451,11.027,0.134
