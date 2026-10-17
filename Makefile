@@ -1,4 +1,4 @@
-RUNS = O4HL O4HLV O5a O5b O5c
+RUNS = O4a O4b IR1HL IR1HLV O5a O5b O5c
 POPS = fullpop pixelpop
 FILENAMES = events events.xml.gz events.sqlite injections.dat coincs.dat
 
@@ -22,13 +22,20 @@ public-alerts.dat: scripts/get-public-alerts.py
 # PSD files to use.
 #
 
-O4HL-psds = \
+O4a-psds = \
 	--H1 o4b_h1_ref.txt \
 	--L1 o4b_l1_ref.txt
-O4HLV-psds = \
+O4b-psds = \
 	--H1 o4b_h1_ref.txt \
 	--L1 o4b_l1_ref.txt \
 	--V1 o4b_v1_ref.txt
+IR1HL-psds = \
+	--H1 o4c_h1_ref.txt \
+	--L1 o4c_l1_ref.txt
+IR1HLV-psds = \
+	--H1 o4c_h1_ref.txt \
+	--L1 o4c_l1_ref.txt \
+	--V1 o4c_v1_ref.txt
 O5a-psds = \
 	--H1 O5StrainCurves_freqabc.txt --H1-column O5aStrain \
 	--L1 O5StrainCurves_freqabc.txt --L1-column O5aStrain \
@@ -58,6 +65,18 @@ o4b_l1_ref.txt:
 # FIXME: not yet public
 o4b_v1_ref.txt:
 	curl -OL https://dcc.ligo.org/T2500388-v1/public/$(@F)
+
+# FIXME: not yet public
+o4c_h1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2500364-v1/public/$(@F)
+
+# FIXME: not yet public
+o4c_l1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2500364-v1/public/$(@F)
+
+# FIXME: not yet public
+o4c_v1_ref.txt:
+	curl -OL https://dcc.ligo.org/T2600243-v1/public/$(@F)
 
 O5StrainCurves_freqabc.txt:
 	curl -OL https://dcc.ligo.org/LIGO-T2500310-v2/public/$(@F)
@@ -183,9 +202,21 @@ coincs_dat_columns := coinc_event_id ifos snr
 # (1 + z)**lamb merger-rate evolution.
 FULLPOP_LAMB = 2.535605802782432
 
-detection-weights: $(patsubst %/coincs.dat,%/detection-weights.dat,$(wildcard runs/*/fullpop/coincs.dat))
+DETECTION_WEIGHTS = $(patsubst %/coincs.dat,%/detection-weights.dat,\
+    $(wildcard $(patsubst %,runs/%/fullpop/coincs.dat,$(RUNS))))
+
+detection-weights: runs/weighted-detections.rst
 
 .PHONY: detection-weights
 
+runs/weighted-detections.rst: scripts/weighted-detections.py scripts/rates.py $(DETECTION_WEIGHTS)
+	$< $(dir $(DETECTION_WEIGHTS)) -o $@
+
+# Each run takes the thresholds of the observing run it reproduces, and the
+# most recent measured, O4b, where the table has none of its own.
+RHO_EQ_RUN = O4b
+runs/O4a/fullpop/detection-weights.dat: RHO_EQ_RUN = O4a
+
 runs/%/fullpop/detection-weights.dat: scripts/detection-weights.py thresholds/rho_eq.csv
-	$< $(@D)/injections.dat $(@D)/coincs.dat thresholds/rho_eq.csv $@ --lamb $(FULLPOP_LAMB)
+	$< $(@D)/injections.dat $(@D)/coincs.dat thresholds/rho_eq.csv $@ \
+	    --lamb $(FULLPOP_LAMB) --rho-eq-run $(RHO_EQ_RUN)
