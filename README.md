@@ -122,6 +122,26 @@ previous step.
 Open the Jupyter notebook `plots-and-tables.ipynb` and run all cells.
 
 
+## To tabulate detection weights (optional)
+
+After the simulations, this command writes
+`runs/<run>/fullpop/detection-weights.dat` for each FullPop run already
+simulated. Its column `passes_rho_eq` flags the events above the network SNR
+threshold equivalent to FAR < 1/yr, and `redshift_weight` restores the redshift
+evolution of the FullPop merger rate:
+
+    $ make detection-weights
+
+It then writes `runs/weighted-detections.rst`, the detections of each class
+under those two choices, in the layout of `runs/summary.rst`: over its own
+observing time for a run that has happened, and per year for a run still to
+come. O4a and O4b observed for the length of their segments, from the GWOSC
+detector-status pages; a forecast has no observing time of its own, so IR1 and
+O5 are given per year.
+
+See `thresholds/README.md` for the thresholds and how they were measured.
+
+
 [IGWN Grid]: https://computing.docs.ligo.org/guide/grid/
 [NASA HECC]: https://www.nas.nasa.gov/hecc/
 [uv]: https://docs.astral.sh/uv/
