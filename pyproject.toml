@@ -7,6 +7,7 @@ requires-python = ">=3.11, <4"
 dependencies = [
     "astropy>=4.1",
     "gracedb-sdk",
+    "gwosc>=0.8.3",
     "gwpopulation",
     "ipykernel",
     "ipython",
